@@ -3,94 +3,58 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.fai.lds.sgh.controller;
-
-import br.fai.lds.sgh.entity.User;
-import java.util.Arrays;
-import java.util.List;
-import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+package br.fai.lds.sgh.entity;
 
 /**
  *
- * @author Marcelo
+ * @author marcelo
  */
-@RestController
-@RequestMapping("api/v1/guest")
-@CrossOrigin(origins = "*")
 public class Guest {
     
-    /**
-     * Create guest
-     * 
-     * @return ResponseEntity
-     */
-    @PostMapping
-    public ResponseEntity<String> create(){
-               
-        return ResponseEntity.ok("create");
+    private long id;
+    private String name;
+    private int age;
+    private String phone;
+
+    public Guest() {
     }
     
-    /**
-     * Read guest by id
-     * 
-     * @param id Identificator of the guest
-     * @return ResponseEntity
-     */
-    @GetMapping("/read/{id}")
-    public ResponseEntity<String> readById(@PathVariable Long id){
-        return ResponseEntity.ok("read");
+    public Guest(long id, String name, int age, String phone) {
+        this.id = id;
+        this.name = name;
+        this.age = age;
+        this.phone = phone;
     }
 
-    /**
-     * Read all guests 
-     * 
-     * @return ResponseEntity
-     */
-    @GetMapping("/read")
-    public ResponseEntity<String> readAll(){
-        return ResponseEntity.ok("read all");
+    public long getId() {
+        return id;
     }
-    
-    /**
-     * Update guest by id
-     * 
-     * @param id Identificator of the guest
-     * @return ResponseEntity
-     */
-    @PutMapping("/update/{id}")
-    public ResponseEntity<String> update(@PathVariable Long id){
-        return ResponseEntity.ok("update");
+
+    public void setId(long id) {
+        this.id = id;
     }
-    
-     /**
-     * Delete guest by id
-     * 
-     * @param id Identificator of the guest
-     * @return ResponseEntity
-     */
-    @DeleteMapping("/delete/{id}")
-    public ResponseEntity<String> delete(@PathVariable Long id){
-        return ResponseEntity.ok("delete");
+
+    public String getName() {
+        return name;
     }
-    
-    @GetMapping("users")
-    public List<User> listUser(){
-        
-        return Arrays.asList(new User("Marcelo", 25L), new User("Vitor", 50L));
+
+    public void setName(String name) {
+        this.name = name;
     }
-    
-    @GetMapping("user/{userName}")
-    public User userByName(@PathVariable("userName") final String userName){
-        
-        return new User("Marcelo", 25L);
+
+    public int getAge() {
+        return age;
     }
-       
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
 }
