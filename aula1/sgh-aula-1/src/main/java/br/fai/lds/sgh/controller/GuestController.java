@@ -5,6 +5,10 @@
  */
 package br.fai.lds.sgh.controller;
 
+import br.fai.lds.sgh.controller.entity.Guest;
+import java.util.ArrayList;
+import java.util.List;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -22,31 +26,54 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/guest")
 @CrossOrigin(origins = "*")
-public class Guest {
+public class GuestController {
     
     @PostMapping
-    public ResponseEntity<String> create(){
-        return ResponseEntity.ok("create");
+    public ResponseEntity create(){
+
+        return ResponseEntity.status(HttpStatus.CREATED).build();
     }
     
     @GetMapping("/read/{id}")
-    public ResponseEntity<String> readById(@PathVariable String id){
-        return ResponseEntity.ok("read");
+    public ResponseEntity<Guest> readById(@PathVariable("id") Long id){
+
+        //... Aqui usava o map 
+        
+        Guest guest = new Guest(1L, "Maria", 25, "34712566");
+        
+        return ResponseEntity.ok(guest);
     }
 
     @GetMapping("/read")
-    public ResponseEntity<String> readAll(){
-        return ResponseEntity.ok("read all");
+    public ResponseEntity<List<Guest>> readAll(){
+                
+        //... Aqui usava o map 
+
+        List<Guest> guestList = new ArrayList<>();
+        
+        for (int i = 0; i < 10; i++) {
+            
+            Guest guest = new Guest(1L, "Guest " + i, 25 + i, "3471256" + i);
+            guestList.add(guest);            
+        }
+        
+        return ResponseEntity.ok(guestList);
     }
     
     @PutMapping("/update/{id}")
-    public ResponseEntity<String> update(@PathVariable String id){
-        return ResponseEntity.ok("update");
+    public ResponseEntity update(@PathVariable("id") Long id){
+
+        System.out.println("Id updated: " + id);
+        
+        return ResponseEntity.status(200).build();
     }
     
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity<String> delete(@PathVariable String id){
-        return ResponseEntity.ok("delete");
+    public ResponseEntity delete(@PathVariable("id") Long id){
+
+        System.out.println("Id deleted: " + id);
+        
+        return ResponseEntity.ok().build();
     }
        
 }
