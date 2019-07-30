@@ -5,7 +5,7 @@
  */
 package br.fai.lds.sgh.controller;
 
-import br.fai.lds.sgh.controller.entity.Guest;
+import br.fai.lds.sgh.entity.Guest;
 import java.util.ArrayList;
 import java.util.List;
 import org.springframework.http.HttpStatus;
@@ -26,6 +26,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/guest")
 @CrossOrigin(origins = "*")
+//@CrossOrigin(origins = "http://localhost:9090")
 public class GuestController {
     
     @PostMapping
