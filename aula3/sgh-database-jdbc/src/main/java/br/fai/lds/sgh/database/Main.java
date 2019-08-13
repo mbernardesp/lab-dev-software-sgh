@@ -36,6 +36,7 @@ public class Main {
                 guest.setIdRoom(rs.getLong("id_room"));
                 guest.setName(rs.getString("_name"));
                 guest.setAge(rs.getInt("age"));
+                guest.setCpf(rs.getString("cpf"));
                 guest.setPhone(rs.getString("phone"));
 
                 guestList.add(guest);

@@ -15,16 +15,18 @@ public class Guest {
     private long idRoom;
     private String name;
     private int age;
+    private String cpf;
     private String phone;
 
     public Guest() {
     }
 
-    public Guest(long id, long idRoom, String name, int age, String phone) {
+    public Guest(long id, long idRoom, String name, int age, String cpf, String phone) {
         this.id = id;
         this.idRoom = idRoom;
         this.name = name;
         this.age = age;
+        this.cpf = cpf;
         this.phone = phone;
     }
 
@@ -60,6 +62,14 @@ public class Guest {
         this.age = age;
     }
 
+    public String getCpf() {
+        return cpf;
+    }
+
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
+    }
+
     public String getPhone() {
         return phone;
     }
@@ -70,7 +80,6 @@ public class Guest {
 
     @Override
     public String toString() {
-        return "Guest{" + "id=" + id + ", idRoom=" + idRoom + ", name=" + name + ", age=" + age + ", phone=" + phone + '}';
+        return "Guest{" + "id=" + id + ", idRoom=" + idRoom + ", name=" + name + ", age=" + age + ", cpf=" + cpf + ", phone=" + phone + '}';
     }
-
 }
