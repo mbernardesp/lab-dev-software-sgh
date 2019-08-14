@@ -6,8 +6,8 @@ CREATE TABLE room
     num VARCHAR(10) NOT NULL,
     _type VARCHAR(10) NOT NULL,
     _status VARCHAR(10) NOT NULL default 'checkout',
-    date_checkin TIMESTAMP WITHOUT TIMEZONE,
-    date_checkout TIMESTAMP WITHOUT TIMEZONE,
+    date_checkin TIMESTAMP WITHOUT TIME ZONE,
+    date_checkout TIMESTAMP WITHOUT TIME ZONE,
     PRIMARY KEY(id)
 );
 
