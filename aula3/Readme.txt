@@ -1,5 +1,7 @@
 Notas da aula 3
-- Criar as tabela do sgh.sql no banco de dados e inserir alguns registros em guest
+- Utilizar os scripts sgh-script-ddl.sql e 
+  sgh-script-dml.sql para criação e inserção 
+  de dados
 - Apresentar a classe de conexão jdbc
 - Apresentar o padrão singleton
 - Apresentar o padrão factory
