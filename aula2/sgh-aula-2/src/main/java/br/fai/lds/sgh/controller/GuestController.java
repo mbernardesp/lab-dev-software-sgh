@@ -67,7 +67,7 @@ public class GuestController {
 
         for (int i = 0; i < 10; i++) {
 
-            Guest guest = new Guest(1L, "Guest " + i, 25 + i, "3471256" + i);
+            Guest guest = new Guest(i, "Guest " + i, 25 + i, "3471256" + i);
             guestList.add(guest);
         }
 
