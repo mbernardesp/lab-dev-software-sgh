@@ -10,8 +10,8 @@ INSERT INTO guest(id, id_room, _name, age, cpf, phone) VALUES (nextval('guest_id
 
 ---------------------------------------------------------
 
-INSERT INTO product(id, id_room, _name, _code) VALUES (nextval('product_id_seq'), 1, 'Coca', '0025');
-INSERT INTO product(id, id_room, _name, _code) VALUES (nextval('product_id_seq'), 1, 'Pepsi', '0028');
+INSERT INTO product(id, _name, _code) VALUES (nextval('product_id_seq'), 'Coca', '0025');
+INSERT INTO product(id, _name, _code) VALUES (nextval('product_id_seq'), 'Pepsi', '0028');
 
 ---------------------------------------------------------
 
@@ -21,7 +21,7 @@ INSERT INTO room_product(id_room, id_product, amount) VALUES (1, 2, 3);
 ---------------------------------------------------------
 
 SELECT * FROM guest WHERE id_room = 1;
-SELECT * FROM roomguest WHERE id_room = 1;
+SELECT * FROM room WHERE id = 1;
 SELECT * FROM guest INNER JOIN room on guest.id_room = room.id WHERE num LIKE '60%';
 
 ---------------------------------------------------------

@@ -6,9 +6,9 @@ CREATE TABLE room
     num VARCHAR(10) NOT NULL,
     _type VARCHAR(10) NOT NULL,
     _status VARCHAR(10) NOT NULL default 'checkout',
-    date_checkin TIMESTAMP,
-    date_checkout TIMESTAMP,
-     PRIMARY KEY(id)
+    date_checkin TIMESTAMP WITHOUT TIMEZONE,
+    date_checkout TIMESTAMP WITHOUT TIMEZONE,
+    PRIMARY KEY(id)
 );
 
 ALTER TABLE room 
@@ -43,7 +43,6 @@ UNIQUE(cpf);
 CREATE TABLE product
 (
     id BIGSERIAL,
-    id_room BIGINT,
     _code VARCHAR(20),
     _name VARCHAR(100) NOT NULL,
     PRIMARY KEY(id)
