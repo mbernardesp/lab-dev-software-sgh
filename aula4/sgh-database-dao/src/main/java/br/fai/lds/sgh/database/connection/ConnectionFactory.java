@@ -14,22 +14,22 @@ import java.sql.SQLException;
  * @author Marcelo
  */
 public class ConnectionFactory {
-    
-    public Connection getConnection() {
-        
-            String url = "jdbc:postgresql://localhost:5432/sgh";
-            String user = "postgres";
-            String pass = "postgres";
-      
-            Connection conn = null;
 
-            try {
-                conn = DriverManager.getConnection(url, user, pass) ;
-            } catch (SQLException ex) {
-                System.out.println(ex);
-            }
+    private static Connection conn = null;
+
+    private static final String url = "jdbc:postgresql://localhost:5432/sgh";
+    private static final String user = "postgres";
+    private static final String pass = "postgres";
+
+    public static Connection getConnection() {
+
+        try {
+            conn = DriverManager.getConnection(url, user, pass);
+        } catch (SQLException ex) {
+            System.out.println(ex);
+        }
 
         return conn;
     }
-    
+
 }

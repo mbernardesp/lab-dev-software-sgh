@@ -17,13 +17,13 @@ public class ConnectionSingleton {
 
     private static Connection conn = null;
 
+    private static final String url = "jdbc:postgresql://localhost:5432/sgh";
+    private static final String user = "postgres";
+    private static final String pass = "postgres";
+            
     public static Connection getConnection() {
 
         if (conn == null) {
-            
-            String url = "jdbc:postgresql://localhost:5432/sgh";
-            String user = "postgres";
-            String pass = "postgres";
       
             try {
                 conn = DriverManager.getConnection(url, user, pass) ;

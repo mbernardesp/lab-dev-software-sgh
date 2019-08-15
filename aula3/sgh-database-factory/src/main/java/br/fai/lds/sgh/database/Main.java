@@ -30,7 +30,7 @@ public class Main {
         
         try {
 
-            conn = new ConnectionFactory().getConnection();
+            conn = ConnectionFactory.getConnection();
 
             PreparedStatement stmt = conn.prepareStatement("SELECT * from guest");
 

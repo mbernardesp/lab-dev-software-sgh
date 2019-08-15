@@ -18,7 +18,7 @@ public class Main {
     public static void main(String[] args) {
 
         GuestDao guestDao = new GuestDao();
-        
+
         //Guest newGuest = new Guest();
         //newGuest.setIdRoom(5);
         //newGuest.setName("Duda");
@@ -35,8 +35,8 @@ public class Main {
         
         //------------------------------
         
-        Guest guest = guestDao.readById(5);
-        guest.setName("Marcelo");        
+        Guest guest = guestDao.readById(1);
+        guest.setName("Marcelo2");        
         guestDao.update(guest);
 
         Guest guestUpdated = guestDao.readById(guest.getId());
