@@ -15,13 +15,13 @@ import java.sql.SQLException;
  */
 public class ConnectionFactory {
 
+    private static Connection conn = null;
+
     private static final String URL = "jdbc:postgresql://localhost:5432/sgh";
     private static final String USER = "postgres";
     private static final String PASS = "postgres";
 
     public static Connection getConnection() {
-
-        Connection conn = null;
 
         try {
             conn = DriverManager.getConnection(URL, USER, PASS);

@@ -5,20 +5,20 @@
  */
 package br.fai.lds.sgh.database.dao;
 
-import br.fai.lds.sgh.database.entity.Guest;
 import java.sql.SQLException;
 import java.util.List;
 
 /**
  *
  * @author Marcelo
+ * @param <T>
  */
-public interface IGuestDao {
+public interface IGuestDao<T> {
     
-    public void create(Guest guest) throws SQLException;
-    public List<Guest> readAll() throws SQLException;
-    public Guest readById(long id) throws SQLException;
-    public void update(Guest guest) throws SQLException;
-    public void delete(Guest guest) throws SQLException;
+    public void create(T guest) throws SQLException;
+    public List<T> readAll() throws SQLException;
+    public T readById(long id) throws SQLException;
+    public void update(T guest) throws SQLException;
+    public void delete(T guest) throws SQLException;
     
 }

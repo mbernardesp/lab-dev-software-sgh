@@ -21,7 +21,7 @@ import org.springframework.stereotype.Repository;
  * @author Marcelo
  */
 @Repository
-public class GuestDao implements IGuestDao{
+public class GuestDao implements IGuestDao<Guest>{
 
     @Override
     public void create(Guest guest) throws SQLException {
