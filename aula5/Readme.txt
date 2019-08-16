@@ -1,11 +1,11 @@
 Notas da aula 5
-- Trabalhando com recursos fechados no finaly, ResultSet, PreparedStatemente e Connection
-- Melhorando o ConnectionFactory para metodo e variáveis static
-- Trabalhando com transações para cada metodo CRUD
-- Criando as interfaces de acesso ao DAO
-- Trabalhando com genérics
+- Apresentar o padrão singleton
 
-Exemplo:
-https://www.mkyong.com/jdbc/jdbc-transaction-example/
+----------
 
+Pattern Singleton
+Não é recomendado o Singleton pois ele parte da política de que seu código deve sempre trabalhar com uma conexão abertas, 
+quando é recomendado que se trabalhe com recursos fechados.
 
+Fazendo da conexão em si um Singleton, sua aplicação ocupará recursos mesmo que esteja ociosa, e também poderá falhar 
+caso o banco de dados resolva fechar a conexão por conta própria.
