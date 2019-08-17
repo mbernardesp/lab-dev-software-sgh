@@ -23,6 +23,7 @@ public class GuestDao implements IGuestDao {
         conn = ConnectionFactory.getConnection();
     }
 
+    @Override
     public void closeConnection() {
         try {
             if (!conn.isClosed()) {

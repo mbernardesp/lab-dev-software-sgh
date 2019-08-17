@@ -15,9 +15,14 @@ import java.util.List;
 public interface IGuestDao {
     
     public void create(Guest guest);
+
     public List<Guest> readAll();
+
     public Guest readById(long id);
+
     public void update(Guest guest);
+
     public void delete(Guest guest);
     
+    public void closeConnection();    
 }

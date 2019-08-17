@@ -5,23 +5,23 @@
  */
 package br.fai.lds.sgh.database.dao;
 
-import br.fai.lds.sgh.database.entity.Guest;
+import br.fai.lds.sgh.database.entity.Product;
 import java.util.List;
 
 /**
  *
  * @author Marcelo
  */
-public interface IGuestDao {
+public interface IProductDao {
     
-    public void create(Guest guest);
+    public void create(Product guest);
     
-    public List<Guest> readAll();
+    public List<Product> readAll();
 
-    public Guest readById(long id);
+    public Product readById(long id);
 
-    public void update(Guest guest);
+    public void update(Product guest);
 
-    public void delete(Guest guest);
+    public void delete(Product guest);
     
 }
