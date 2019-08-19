@@ -10,8 +10,18 @@ package br.fai.lds.sgh.database.enumerator;
  * @author Marcelo
  */
 public enum EStatus {
-    
-    CHECKIN,
-    CHECKOUT
-    
+
+    CHECKIN("CHECKIN"),
+    CHECKOUT("CHECKOUT");
+
+    private String str;
+
+    EStatus(String str) {
+        this.str = str;
+    }
+
+    public String get() {
+        return str;
+    }
+
 }

@@ -6,39 +6,36 @@
 package br.fai.lds.sgh.database.dao.impl;
 
 import br.fai.lds.sgh.database.connection.ConnectionFactory;
-import br.fai.lds.sgh.database.entity.Guest;
+import br.fai.lds.sgh.database.dao.IProductDao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import br.fai.lds.sgh.database.dao.IRoomDao;
-import br.fai.lds.sgh.database.entity.Room;
+import br.fai.lds.sgh.database.entity.Product;
 
 /**
  *
  * @author Marcelo
  */
-public class RoomDao implements IRoomDao {
+public class ProductDao implements IProductDao {
 
     @Override
-    public void create(Room room) {
+    public void create(Product product) {
 
         Connection conn = null;
         PreparedStatement stmt = null;
 
-        String sql = "INSERT INTO guest (id, id_room, _name, age, phone) VALUES(nextval('guest_id_seq'), ?, ?, ?, ?)";
+        String sql = "INSERT INTO product (id, _code, _name) VALUES(nextval('product_id_seq'), ?, ?)";
 
         try {
             conn = ConnectionFactory.getConnection();
             conn.setAutoCommit(false);
 
             stmt = conn.prepareStatement(sql);
-            stmt.setLong(1, guest.getIdRoom());
-            stmt.setString(2, guest.getName());
-            stmt.setInt(3, guest.getAge());
-            stmt.setString(4, guest.getPhone());
+            stmt.setString(1, product.getCode());
+            stmt.setString(2, product.getName());
 
             stmt.execute();
 
@@ -69,9 +66,9 @@ public class RoomDao implements IRoomDao {
     }
 
     @Override
-    public List<Room> readAll() {
+    public List<Product> readAll() {
 
-        List<Guest> guestList = new ArrayList<>();
+        List<Product> productList = new ArrayList<>();
 
         Connection conn = null;
         PreparedStatement stmt = null;
@@ -80,21 +77,19 @@ public class RoomDao implements IRoomDao {
         try {
             conn = ConnectionFactory.getConnection();
 
-            stmt = conn.prepareStatement("SELECT * from guest");
-
+            stmt = conn.prepareStatement("SELECT * from product");
+            
             rs = stmt.executeQuery();
 
             while (rs.next()) {
 
-                Guest guest = new Guest();
-                guest.setId(rs.getLong("id"));
-                guest.setIdRoom(rs.getLong("id_room"));
-                guest.setName(rs.getString("_name"));
-                guest.setAge(rs.getInt("age"));
-                guest.setPhone(rs.getString("phone"));
+                Product product = new Product();
+                product.setId(rs.getLong("id"));
+                product.setCode(rs.getString("_code"));                
+                product.setName(rs.getString("_name"));                
 
                 // adicionando o objeto à lista
-                guestList.add(guest);
+                productList.add(product);
             }
 
         } catch (SQLException ex) {
@@ -122,14 +117,13 @@ public class RoomDao implements IRoomDao {
             }
         }
 
-        return guestList;
+        return productList;
     }
 
-    //EXERCÍCIO EM SALA
     @Override
-    public Room readById(long id) {
+    public Product readById(long id) {
 
-        Guest guest = null;
+        Product product = null;
 
         Connection conn = null;
         PreparedStatement stmt = null;
@@ -138,18 +132,16 @@ public class RoomDao implements IRoomDao {
         try {
             conn = ConnectionFactory.getConnection();
 
-            stmt = conn.prepareStatement("SELECT * FROM guest WHERE id = ?");
+            stmt = conn.prepareStatement("SELECT * FROM product WHERE id = ?");
             stmt.setLong(1, id);
 
             rs = stmt.executeQuery();
 
             if (rs.next()) {
-                guest = new Guest();
-                guest.setId(rs.getLong("id"));
-                guest.setIdRoom(rs.getLong("id_room"));
-                guest.setName(rs.getString("_name"));
-                guest.setAge(rs.getInt("age"));
-                guest.setPhone(rs.getString("phone"));
+                product = new Product();
+                product.setId(rs.getLong("id"));
+                product.setCode(rs.getString("_code"));                
+                product.setName(rs.getString("_name"));                
             }
 
         } catch (SQLException ex) {
@@ -178,28 +170,25 @@ public class RoomDao implements IRoomDao {
             }
         }
 
-        return guest;
+        return product;
     }
 
-    //EXERCÍCIO EM SALA
     @Override
-    public void update(Room room) {
+    public void update(Product product) {
 
         Connection conn = null;
         PreparedStatement stmt = null;
 
-        String sql = "UPDATE guest SET id_room = ?, _name = ?, age = ?, phone = ? WHERE id = ?";
+        String sql = "UPDATE product SET _code = ?, _name = ? WHERE id = ?";
 
         try {
             conn = ConnectionFactory.getConnection();
             conn.setAutoCommit(false);
 
             stmt = conn.prepareStatement(sql);
-            stmt.setLong(1, guest.getIdRoom());
-            stmt.setString(2, guest.getName());
-            stmt.setInt(3, guest.getAge());
-            stmt.setString(4, guest.getPhone());
-            stmt.setLong(5, guest.getId());
+            stmt.setString(1, product.getCode());
+            stmt.setString(2, product.getName());
+            stmt.setLong(3, product.getId());
 
             stmt.execute();
             conn.commit();
@@ -230,19 +219,19 @@ public class RoomDao implements IRoomDao {
 
     //EXERCÍCIO EM SALA
     @Override
-    public void delete(Room room) {
+    public void delete(Product product) {
 
         Connection conn = null;
         PreparedStatement stmt = null;
 
-        String sql = "DELETE FROM guest WHERE id = ?";
+        String sql = "DELETE FROM product WHERE id = ?";
 
         try {
             conn = ConnectionFactory.getConnection();
             conn.setAutoCommit(false);
 
             stmt = conn.prepareStatement(sql);
-            stmt.setLong(1, guest.getId());
+            stmt.setLong(1, product.getId());
 
             stmt.execute();
             conn.commit();

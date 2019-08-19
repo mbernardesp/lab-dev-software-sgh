@@ -6,7 +6,6 @@
 package br.fai.lds.sgh.database.dao.impl;
 
 import br.fai.lds.sgh.database.connection.ConnectionFactory;
-import br.fai.lds.sgh.database.entity.Guest;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -15,6 +14,8 @@ import java.util.ArrayList;
 import java.util.List;
 import br.fai.lds.sgh.database.dao.IRoomDao;
 import br.fai.lds.sgh.database.entity.Room;
+import br.fai.lds.sgh.database.enumerator.EStatus;
+import br.fai.lds.sgh.database.enumerator.EType;
 
 /**
  *
@@ -28,17 +29,18 @@ public class RoomDao implements IRoomDao {
         Connection conn = null;
         PreparedStatement stmt = null;
 
-        String sql = "INSERT INTO guest (id, id_room, _name, age, phone) VALUES(nextval('guest_id_seq'), ?, ?, ?, ?)";
+        String sql = "INSERT INTO room (id, num, _type, _status, date_checkin, date_checkout) VALUES(nextval('room_id_seq'), ?, ?, ?, ?, ?)";
 
         try {
             conn = ConnectionFactory.getConnection();
             conn.setAutoCommit(false);
 
             stmt = conn.prepareStatement(sql);
-            stmt.setLong(1, guest.getIdRoom());
-            stmt.setString(2, guest.getName());
-            stmt.setInt(3, guest.getAge());
-            stmt.setString(4, guest.getPhone());
+            stmt.setString(1, room.getNum());
+            stmt.setString(2, room.getType().toString());
+            stmt.setString(3, room.getStatus().toString());
+            stmt.setTimestamp(4, room.getDateCheckIn());
+            stmt.setTimestamp(5, room.getDateCheckOut());
 
             stmt.execute();
 
@@ -71,7 +73,7 @@ public class RoomDao implements IRoomDao {
     @Override
     public List<Room> readAll() {
 
-        List<Guest> guestList = new ArrayList<>();
+        List<Room> roomList = new ArrayList<>();
 
         Connection conn = null;
         PreparedStatement stmt = null;
@@ -80,21 +82,22 @@ public class RoomDao implements IRoomDao {
         try {
             conn = ConnectionFactory.getConnection();
 
-            stmt = conn.prepareStatement("SELECT * from guest");
-
+            stmt = conn.prepareStatement("SELECT * from room");
+            
             rs = stmt.executeQuery();
 
             while (rs.next()) {
 
-                Guest guest = new Guest();
-                guest.setId(rs.getLong("id"));
-                guest.setIdRoom(rs.getLong("id_room"));
-                guest.setName(rs.getString("_name"));
-                guest.setAge(rs.getInt("age"));
-                guest.setPhone(rs.getString("phone"));
+                Room room = new Room();
+                room.setId(rs.getLong("id"));
+                room.setNum(rs.getString("num"));                
+                room.setType(EType.valueOf(rs.getString("_type")));
+                room.setStatus(EStatus.valueOf(rs.getString("_status")));                
+                room.setDateCheckIn(rs.getTimestamp("date_checkin"));
+                room.setDateCheckOut(rs.getTimestamp("date_checkout"));
 
                 // adicionando o objeto à lista
-                guestList.add(guest);
+                roomList.add(room);
             }
 
         } catch (SQLException ex) {
@@ -122,14 +125,13 @@ public class RoomDao implements IRoomDao {
             }
         }
 
-        return guestList;
+        return roomList;
     }
 
-    //EXERCÍCIO EM SALA
     @Override
     public Room readById(long id) {
 
-        Guest guest = null;
+        Room room = null;
 
         Connection conn = null;
         PreparedStatement stmt = null;
@@ -138,18 +140,19 @@ public class RoomDao implements IRoomDao {
         try {
             conn = ConnectionFactory.getConnection();
 
-            stmt = conn.prepareStatement("SELECT * FROM guest WHERE id = ?");
+            stmt = conn.prepareStatement("SELECT * FROM room WHERE id = ?");
             stmt.setLong(1, id);
 
             rs = stmt.executeQuery();
 
             if (rs.next()) {
-                guest = new Guest();
-                guest.setId(rs.getLong("id"));
-                guest.setIdRoom(rs.getLong("id_room"));
-                guest.setName(rs.getString("_name"));
-                guest.setAge(rs.getInt("age"));
-                guest.setPhone(rs.getString("phone"));
+                room = new Room();
+                room.setId(rs.getLong("id"));
+                room.setNum(rs.getString("num"));                
+                room.setType(EType.valueOf(rs.getString("_type")));
+                room.setStatus(EStatus.valueOf(rs.getString("_status")));                
+                room.setDateCheckIn(rs.getTimestamp("date_checkin"));
+                room.setDateCheckOut(rs.getTimestamp("date_checkout"));
             }
 
         } catch (SQLException ex) {
@@ -178,28 +181,28 @@ public class RoomDao implements IRoomDao {
             }
         }
 
-        return guest;
+        return room;
     }
 
-    //EXERCÍCIO EM SALA
     @Override
     public void update(Room room) {
 
         Connection conn = null;
         PreparedStatement stmt = null;
 
-        String sql = "UPDATE guest SET id_room = ?, _name = ?, age = ?, phone = ? WHERE id = ?";
-
+        String sql = "UPDATE room SET num = ?, _type = ?, _status = ?, date_checkin = ?, date_checkout = ? WHERE id = ?";
+        
         try {
             conn = ConnectionFactory.getConnection();
             conn.setAutoCommit(false);
 
             stmt = conn.prepareStatement(sql);
-            stmt.setLong(1, guest.getIdRoom());
-            stmt.setString(2, guest.getName());
-            stmt.setInt(3, guest.getAge());
-            stmt.setString(4, guest.getPhone());
-            stmt.setLong(5, guest.getId());
+            stmt.setString(1, room.getNum());
+            stmt.setString(2, room.getType().get());
+            stmt.setString(3, room.getStatus().get());
+            stmt.setTimestamp(4, room.getDateCheckIn());
+            stmt.setTimestamp(5, room.getDateCheckOut());
+            stmt.setLong(6, room.getId());
 
             stmt.execute();
             conn.commit();
@@ -235,14 +238,14 @@ public class RoomDao implements IRoomDao {
         Connection conn = null;
         PreparedStatement stmt = null;
 
-        String sql = "DELETE FROM guest WHERE id = ?";
+        String sql = "DELETE FROM room WHERE id = ?";
 
         try {
             conn = ConnectionFactory.getConnection();
             conn.setAutoCommit(false);
 
             stmt = conn.prepareStatement(sql);
-            stmt.setLong(1, guest.getId());
+            stmt.setLong(1, room.getId());
 
             stmt.execute();
             conn.commit();

@@ -11,7 +11,17 @@ package br.fai.lds.sgh.database.enumerator;
  */
 public enum EType {
     
-    STD,
-    LUX
+    STD("STD"),
+    LUX("LUX");
+    
+    private String str;
+    
+    EType(String str){
+        this.str = str;
+    }
+    
+    public String get(){
+        return str;
+    }
     
 }
