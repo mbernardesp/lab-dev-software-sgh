@@ -13,10 +13,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import br.fai.lds.sgh.database.dao.IRoomProductDao;
-import br.fai.lds.sgh.database.entity.Room;
 import br.fai.lds.sgh.database.entity.RoomProduct;
-import br.fai.lds.sgh.database.enumerator.EStatus;
-import br.fai.lds.sgh.database.enumerator.EType;
 
 /**
  *
