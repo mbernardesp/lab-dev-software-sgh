@@ -14,14 +14,14 @@ import java.util.List;
  */
 public interface IRoomDao {
     
-    public void create(Room guest);
+    public void create(Room room);
     
     public List<Room> readAll();
 
     public Room readById(long id);
 
-    public void update(Room guest);
+    public void update(Room room);
 
-    public void delete(Room guest);
+    public void delete(Room room);
     
 }

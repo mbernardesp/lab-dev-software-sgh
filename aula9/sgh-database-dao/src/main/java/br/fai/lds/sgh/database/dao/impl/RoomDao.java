@@ -231,7 +231,6 @@ public class RoomDao implements IRoomDao {
         }
     }
 
-    //EXERCÍCIO EM SALA
     @Override
     public void delete(Room room) {
 

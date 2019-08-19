@@ -217,7 +217,6 @@ public class ProductDao implements IProductDao {
         }
     }
 
-    //EXERCÍCIO EM SALA
     @Override
     public void delete(Product product) {
 

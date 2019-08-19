@@ -14,14 +14,14 @@ import java.util.List;
  */
 public interface IProductDao {
     
-    public void create(Product guest);
+    public void create(Product product);
     
     public List<Product> readAll();
 
     public Product readById(long id);
 
-    public void update(Product guest);
+    public void update(Product product);
 
-    public void delete(Product guest);
+    public void delete(Product product);
     
 }

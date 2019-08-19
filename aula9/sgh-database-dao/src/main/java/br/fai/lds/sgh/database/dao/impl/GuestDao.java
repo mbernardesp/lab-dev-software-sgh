@@ -124,7 +124,6 @@ public class GuestDao implements IGuestDao {
         return guestList;
     }
 
-    //EXERCÍCIO EM SALA
     @Override
     public Guest readById(long id) {
 
@@ -180,7 +179,6 @@ public class GuestDao implements IGuestDao {
         return guest;
     }
 
-    //EXERCÍCIO EM SALA
     @Override
     public void update(Guest guest) {
 
@@ -227,7 +225,6 @@ public class GuestDao implements IGuestDao {
         }
     }
 
-    //EXERCÍCIO EM SALA
     @Override
     public void delete(Guest guest) {
 
