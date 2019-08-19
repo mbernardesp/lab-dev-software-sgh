@@ -1,4 +1,5 @@
 Notas da aula 9
 - Criando todas entitys
 - Criando todas interfaces
-- Implementando todos os metodos
+- Trabalhando com enum
+- Implementando todos os metodos 

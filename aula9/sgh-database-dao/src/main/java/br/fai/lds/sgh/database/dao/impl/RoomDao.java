@@ -13,16 +13,17 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import br.fai.lds.sgh.database.dao.IGuestDao;
+import br.fai.lds.sgh.database.dao.IRoomDao;
+import br.fai.lds.sgh.database.entity.Room;
 
 /**
  *
  * @author Marcelo
  */
-public class GuestDao implements IGuestDao {
+public class RoomDao implements IRoomDao {
 
     @Override
-    public void create(Guest guest) {
+    public void create(Room room) {
 
         Connection conn = null;
         PreparedStatement stmt = null;
@@ -68,7 +69,7 @@ public class GuestDao implements IGuestDao {
     }
 
     @Override
-    public List<Guest> readAll() {
+    public List<Room> readAll() {
 
         List<Guest> guestList = new ArrayList<>();
 
@@ -126,7 +127,7 @@ public class GuestDao implements IGuestDao {
 
     //EXERCÍCIO EM SALA
     @Override
-    public Guest readById(long id) {
+    public Room readById(long id) {
 
         Guest guest = null;
 
@@ -182,7 +183,7 @@ public class GuestDao implements IGuestDao {
 
     //EXERCÍCIO EM SALA
     @Override
-    public void update(Guest guest) {
+    public void update(Room room) {
 
         Connection conn = null;
         PreparedStatement stmt = null;
@@ -229,7 +230,7 @@ public class GuestDao implements IGuestDao {
 
     //EXERCÍCIO EM SALA
     @Override
-    public void delete(Guest guest) {
+    public void delete(Room room) {
 
         Connection conn = null;
         PreparedStatement stmt = null;
