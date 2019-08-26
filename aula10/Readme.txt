@@ -1,4 +1,6 @@
-Notas da aula 10
-- Criando o grupo de projetos com o banco de dados e a aplicação rest criada anteriormente
+﻿Notas da aula 10
+- Separando os projetos para agrupa-los na próxima aula
+- Renomeando os projetos para padronizar
 - Adicionando a dependência no pom para utilizar injeção de dependências do spring-context 
-- Injetando o DAO na aplicação rest
+- Anotando as classes DAO com @Component ou @Repository
+- Injetando as classes DAO com @Autowired

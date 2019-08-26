@@ -38,7 +38,14 @@ public class GuestController {
     @PostConstruct
     private void testInject() {
         System.out.println("Objeto: " + guestDao);
-   }
+
+        List<Guest> guestList = guestDao.readAll();
+
+        for (Guest guest : guestList) {
+            System.out.println(guest);
+        }
+
+    }
 
     /**
      * Create guest

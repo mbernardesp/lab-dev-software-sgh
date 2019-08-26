@@ -6,42 +6,40 @@
 package br.fai.lds.sgh.database.dao.impl;
 
 import br.fai.lds.sgh.database.connection.ConnectionFactory;
+import br.fai.lds.sgh.database.entity.Guest;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import br.fai.lds.sgh.database.dao.IRoomDao;
-import br.fai.lds.sgh.database.entity.Room;
-import br.fai.lds.sgh.database.enumerator.EStatus;
-import br.fai.lds.sgh.database.enumerator.EType;
+import br.fai.lds.sgh.database.dao.IGuestDao;
+import org.springframework.stereotype.Component;
 
 /**
  *
  * @author Marcelo
  */
-public class RoomDao implements IRoomDao {
+@Component
+public class GuestDao implements IGuestDao {
 
     @Override
-    public void create(Room room) {
+    public void create(Guest guest) {
 
         Connection conn = null;
         PreparedStatement stmt = null;
 
-        String sql = "INSERT INTO room (id, num, _type, _status, date_checkin, date_checkout) VALUES(nextval('room_id_seq'), ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO guest (id, id_room, _name, age, phone) VALUES(nextval('guest_id_seq'), ?, ?, ?, ?)";
 
         try {
             conn = ConnectionFactory.getConnection();
             conn.setAutoCommit(false);
 
             stmt = conn.prepareStatement(sql);
-            stmt.setString(1, room.getNum());
-//            stmt.setString(2, room.getType().toString());
-            stmt.setString(2, room.getType().get());
-            stmt.setString(3, room.getStatus().get());
-            stmt.setTimestamp(4, room.getDateCheckIn());
-            stmt.setTimestamp(5, room.getDateCheckOut());
+            stmt.setLong(1, guest.getIdRoom());
+            stmt.setString(2, guest.getName());
+            stmt.setInt(3, guest.getAge());
+            stmt.setString(4, guest.getPhone());
 
             stmt.execute();
 
@@ -72,9 +70,9 @@ public class RoomDao implements IRoomDao {
     }
 
     @Override
-    public List<Room> readAll() {
+    public List<Guest> readAll() {
 
-        List<Room> roomList = new ArrayList<>();
+        List<Guest> guestList = new ArrayList<>();
 
         Connection conn = null;
         PreparedStatement stmt = null;
@@ -83,22 +81,21 @@ public class RoomDao implements IRoomDao {
         try {
             conn = ConnectionFactory.getConnection();
 
-            stmt = conn.prepareStatement("SELECT * from room");
-            
+            stmt = conn.prepareStatement("SELECT * from guest");
+
             rs = stmt.executeQuery();
 
             while (rs.next()) {
 
-                Room room = new Room();
-                room.setId(rs.getLong("id"));
-                room.setNum(rs.getString("num"));                
-                room.setType(EType.valueOf(rs.getString("_type")));
-                room.setStatus(EStatus.valueOf(rs.getString("_status")));                
-                room.setDateCheckIn(rs.getTimestamp("date_checkin"));
-                room.setDateCheckOut(rs.getTimestamp("date_checkout"));
+                Guest guest = new Guest();
+                guest.setId(rs.getLong("id"));
+                guest.setIdRoom(rs.getLong("id_room"));
+                guest.setName(rs.getString("_name"));
+                guest.setAge(rs.getInt("age"));
+                guest.setPhone(rs.getString("phone"));
 
                 // adicionando o objeto à lista
-                roomList.add(room);
+                guestList.add(guest);
             }
 
         } catch (SQLException ex) {
@@ -126,13 +123,13 @@ public class RoomDao implements IRoomDao {
             }
         }
 
-        return roomList;
+        return guestList;
     }
 
     @Override
-    public Room readById(long id) {
+    public Guest readById(long id) {
 
-        Room room = null;
+        Guest guest = null;
 
         Connection conn = null;
         PreparedStatement stmt = null;
@@ -141,19 +138,18 @@ public class RoomDao implements IRoomDao {
         try {
             conn = ConnectionFactory.getConnection();
 
-            stmt = conn.prepareStatement("SELECT * FROM room WHERE id = ?");
+            stmt = conn.prepareStatement("SELECT * FROM guest WHERE id = ?");
             stmt.setLong(1, id);
 
             rs = stmt.executeQuery();
 
             if (rs.next()) {
-                room = new Room();
-                room.setId(rs.getLong("id"));
-                room.setNum(rs.getString("num"));                
-                room.setType(EType.valueOf(rs.getString("_type")));
-                room.setStatus(EStatus.valueOf(rs.getString("_status")));                
-                room.setDateCheckIn(rs.getTimestamp("date_checkin"));
-                room.setDateCheckOut(rs.getTimestamp("date_checkout"));
+                guest = new Guest();
+                guest.setId(rs.getLong("id"));
+                guest.setIdRoom(rs.getLong("id_room"));
+                guest.setName(rs.getString("_name"));
+                guest.setAge(rs.getInt("age"));
+                guest.setPhone(rs.getString("phone"));
             }
 
         } catch (SQLException ex) {
@@ -182,28 +178,27 @@ public class RoomDao implements IRoomDao {
             }
         }
 
-        return room;
+        return guest;
     }
 
     @Override
-    public void update(Room room) {
+    public void update(Guest guest) {
 
         Connection conn = null;
         PreparedStatement stmt = null;
 
-        String sql = "UPDATE room SET num = ?, _type = ?, _status = ?, date_checkin = ?, date_checkout = ? WHERE id = ?";
-        
+        String sql = "UPDATE guest SET id_room = ?, _name = ?, age = ?, phone = ? WHERE id = ?";
+
         try {
             conn = ConnectionFactory.getConnection();
             conn.setAutoCommit(false);
 
             stmt = conn.prepareStatement(sql);
-            stmt.setString(1, room.getNum());
-            stmt.setString(2, room.getType().get());
-            stmt.setString(3, room.getStatus().get());
-            stmt.setTimestamp(4, room.getDateCheckIn());
-            stmt.setTimestamp(5, room.getDateCheckOut());
-            stmt.setLong(6, room.getId());
+            stmt.setLong(1, guest.getIdRoom());
+            stmt.setString(2, guest.getName());
+            stmt.setInt(3, guest.getAge());
+            stmt.setString(4, guest.getPhone());
+            stmt.setLong(5, guest.getId());
 
             stmt.execute();
             conn.commit();
@@ -233,19 +228,19 @@ public class RoomDao implements IRoomDao {
     }
 
     @Override
-    public void delete(Room room) {
+    public void delete(Guest guest) {
 
         Connection conn = null;
         PreparedStatement stmt = null;
 
-        String sql = "DELETE FROM room WHERE id = ?";
+        String sql = "DELETE FROM guest WHERE id = ?";
 
         try {
             conn = ConnectionFactory.getConnection();
             conn.setAutoCommit(false);
 
             stmt = conn.prepareStatement(sql);
-            stmt.setLong(1, room.getId());
+            stmt.setLong(1, guest.getId());
 
             stmt.execute();
             conn.commit();
@@ -272,4 +267,47 @@ public class RoomDao implements IRoomDao {
             }
         }
     }
+    
+    
+        @Override
+    public void deleteById(long id) {
+
+        Connection conn = null;
+        PreparedStatement stmt = null;
+
+        String sql = "DELETE FROM guest WHERE id = ?";
+
+        try {
+            conn = ConnectionFactory.getConnection();
+            conn.setAutoCommit(false);
+
+            stmt = conn.prepareStatement(sql);
+            stmt.setLong(1, id);
+
+            stmt.execute();
+            conn.commit();
+        } catch (SQLException e) {
+
+            try {
+                conn.rollback();
+            } catch (SQLException ex) {
+            }
+
+        } finally {
+            try {
+                if (!stmt.isClosed()) {
+                    stmt.close();
+                }
+            } catch (SQLException ex) {
+            }
+
+            try {
+                if (!conn.isClosed()) {
+                    conn.close();
+                }
+            } catch (SQLException ex) {
+            }
+        }
+    }
+    
 }

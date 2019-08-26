@@ -5,9 +5,9 @@
  */
 package br.fai.lds.sgh;
 
-import br.fai.lds.sgh.database.dao.IGuestDao;
 import br.fai.lds.sgh.database.dao.impl.GuestDao;
 import br.fai.lds.sgh.database.entity.Guest;
+import java.sql.SQLException;
 import java.util.List;
 
 /**
@@ -16,18 +16,17 @@ import java.util.List;
  */
 public class Main {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws SQLException {
 
-        IGuestDao guestDao = new GuestDao();
-
-        Guest newGuest = new Guest();
-        newGuest.setIdRoom(2);
-        newGuest.setName("Juca2");
-        newGuest.setAge(89);
-        newGuest.setCpf("01375266588");
-        newGuest.setPhone("35992458877");
+        GuestDao guestDao = new GuestDao();
         
-        guestDao.create(newGuest);
+        //Guest newGuest = new Guest();
+        //newGuest.setIdRoom(5);
+        //newGuest.setName("Duda");
+        //newGuest.setAge(19);
+        //newGuest.setPhone("35992458877");
+        
+        //guestDao.create(newGuest);
         
         List<Guest> guestList = guestDao.readAll();
 
@@ -37,14 +36,13 @@ public class Main {
         
         //------------------------------
         
-//        Guest guest = guestDao.readById(1);
-//        guest.setName("Dona Maria");        
+//        Guest guest = guestDao.readById(5);
+//        guest.setName("Marcelo");        
 //        guestDao.update(guest);
 //
 //        Guest guestUpdated = guestDao.readById(guest.getId());
 //        System.out.println(guestUpdated);
 
-        guestDao.closeConnection();
     }
     
 }

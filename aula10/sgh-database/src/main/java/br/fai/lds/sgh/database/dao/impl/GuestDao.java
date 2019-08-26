@@ -14,13 +14,14 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import br.fai.lds.sgh.database.dao.IGuestDao;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
 /**
  *
  * @author Marcelo
  */
-@Component
+//@Component
+@Repository
 public class GuestDao implements IGuestDao {
 
     @Override

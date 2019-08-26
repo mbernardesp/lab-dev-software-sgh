@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    
+    <parent>
+        <groupId>br.fai.lds</groupId>
+        <artifactId>sgh</artifactId>
+        <version>1.0.0</version>
+    </parent>
+     
+    <artifactId>sgh-api</artifactId>
+
+    <packaging>jar</packaging>
+    <name>sgh-api</name>
+    <description>Sistema gerenciador hoteleiro</description>
+    
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+    </properties>
+    
+    <dependencies>
+        <!--Spring boot dependency-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>                      
+            <version>2.1.4.RELEASE</version>
+        </dependency>
+        
+        <!--Swagger dependency-->
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger-ui</artifactId>
+            <version>2.6.1</version>
+        </dependency>
+        
+        <dependency>
+            <groupId>io.springfox</groupId>
+            <artifactId>springfox-swagger2</artifactId>
+            <version>2.6.1</version>
+        </dependency>
+        
+        <!--SGH Database module-->
+        <dependency>
+            <groupId>br.fai.lds</groupId>
+            <artifactId>sgh-database</artifactId>
+            <version>1.0.0</version>
+        </dependency>
+        
+    </dependencies>
+    
+    <build>
+        <finalName>${project.name}</finalName>
+        
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <version>2.1.4.RELEASE</version>
+                <configuration>
+                    <executable>true</executable>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+       
+</project>
