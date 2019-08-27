@@ -37,7 +37,6 @@ public class RoomDao implements IRoomDao {
 
             stmt = conn.prepareStatement(sql);
             stmt.setString(1, room.getNum());
-//            stmt.setString(2, room.getType().toString());
             stmt.setString(2, room.getType().get());
             stmt.setString(3, room.getStatus().get());
             stmt.setTimestamp(4, room.getDateCheckIn());
