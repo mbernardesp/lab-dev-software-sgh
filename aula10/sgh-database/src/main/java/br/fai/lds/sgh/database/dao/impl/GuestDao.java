@@ -20,7 +20,6 @@ import org.springframework.stereotype.Repository;
  *
  * @author Marcelo
  */
-//@Component
 @Repository
 public class GuestDao implements IGuestDao {
 
@@ -229,49 +228,7 @@ public class GuestDao implements IGuestDao {
     }
 
     @Override
-    public void delete(Guest guest) {
-
-        Connection conn = null;
-        PreparedStatement stmt = null;
-
-        String sql = "DELETE FROM guest WHERE id = ?";
-
-        try {
-            conn = ConnectionFactory.getConnection();
-            conn.setAutoCommit(false);
-
-            stmt = conn.prepareStatement(sql);
-            stmt.setLong(1, guest.getId());
-
-            stmt.execute();
-            conn.commit();
-        } catch (SQLException e) {
-
-            try {
-                conn.rollback();
-            } catch (SQLException ex) {
-            }
-
-        } finally {
-            try {
-                if (!stmt.isClosed()) {
-                    stmt.close();
-                }
-            } catch (SQLException ex) {
-            }
-
-            try {
-                if (!conn.isClosed()) {
-                    conn.close();
-                }
-            } catch (SQLException ex) {
-            }
-        }
-    }
-    
-    
-        @Override
-    public void deleteById(long id) {
+    public void delete(long id) {
 
         Connection conn = null;
         PreparedStatement stmt = null;
@@ -310,5 +267,4 @@ public class GuestDao implements IGuestDao {
             }
         }
     }
-    
 }

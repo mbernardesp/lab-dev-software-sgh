@@ -222,7 +222,7 @@ public class RoomProductDao implements IRoomProductDao {
     }
 
     @Override
-    public void delete(RoomProduct roomProduct) {
+    public void delete(long idRoom, long idProduct) {
 
         Connection conn = null;
         PreparedStatement stmt = null;
@@ -234,8 +234,8 @@ public class RoomProductDao implements IRoomProductDao {
             conn.setAutoCommit(false);
 
             stmt = conn.prepareStatement(sql);
-            stmt.setLong(1, roomProduct.getId_room());
-            stmt.setLong(2, roomProduct.getId_product());
+            stmt.setLong(1, idRoom);
+            stmt.setLong(2, idProduct);
 
             stmt.execute();
             conn.commit();

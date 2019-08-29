@@ -220,7 +220,7 @@ public class ProductDao implements IProductDao {
     }
 
     @Override
-    public void delete(Product product) {
+    public void delete(long id) {
 
         Connection conn = null;
         PreparedStatement stmt = null;
@@ -232,7 +232,7 @@ public class ProductDao implements IProductDao {
             conn.setAutoCommit(false);
 
             stmt = conn.prepareStatement(sql);
-            stmt.setLong(1, product.getId());
+            stmt.setLong(1, id);
 
             stmt.execute();
             conn.commit();

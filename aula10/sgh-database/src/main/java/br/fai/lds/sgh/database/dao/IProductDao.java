@@ -22,6 +22,6 @@ public interface IProductDao {
 
     public void update(Product product);
 
-    public void delete(Product product);
+    public void delete(long id);
     
 }

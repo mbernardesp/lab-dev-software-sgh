@@ -22,6 +22,6 @@ public interface IRoomProductDao {
 
     public void update(RoomProduct roomProduct);
 
-    public void delete(RoomProduct roomProduct);
+    public void delete(long idRoom, long idProduct);
     
 }

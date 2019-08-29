@@ -22,7 +22,5 @@ public interface IGuestDao {
 
     public void update(Guest guest);
 
-    public void delete(Guest guest);
-    
-    public void deleteById(long id);
+    public void delete(long id);
 }

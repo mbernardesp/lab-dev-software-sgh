@@ -22,6 +22,6 @@ public interface IRoomDao {
 
     public void update(Room room);
 
-    public void delete(Room room);
+    public void delete(long id);
     
 }

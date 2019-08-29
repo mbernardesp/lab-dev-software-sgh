@@ -9,9 +9,7 @@ import br.fai.lds.sgh.database.dao.IGuestDao;
 import br.fai.lds.sgh.database.entity.Guest;
 import java.util.ArrayList;
 import java.util.List;
-import javax.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -35,14 +33,10 @@ public class GuestController {
     @Autowired
     IGuestDao guestDao;
 
-    @PostConstruct
-    private void testInject() {
-        System.out.println("Objeto: " + guestDao);
-   }
-
     /**
      * Create guest
      *
+     * @param guest
      * @return ResponseEntity
      */
     @PostMapping
@@ -50,12 +44,13 @@ public class GuestController {
 
         guestDao.create(guest);
 
-        return ResponseEntity.status(HttpStatus.CREATED).build();
+        return ResponseEntity.ok().build();
     }
 
     /**
      * Read guest by id
      *
+     * @param id
      * @return ResponseEntity
      */
     @GetMapping("/read/{id}")
@@ -84,9 +79,10 @@ public class GuestController {
     /**
      * Update guest by id
      *
+     * @param guest
      * @return ResponseEntity
      */
-    @PutMapping("/update/{id}")
+    @PutMapping("/update")
     public ResponseEntity update(@RequestBody Guest guest) {
 
         guestDao.update(guest);
@@ -97,13 +93,13 @@ public class GuestController {
     /**
      * Delete guest by id
      *
-     * @param id Identifier of the guest
+     * @param id
      * @return ResponseEntity
      */
     @DeleteMapping("/delete/{id}")
     public ResponseEntity delete(@PathVariable("id") long id) {
 
-        guestDao.deleteById(id);
+        guestDao.delete(id);
 
         return ResponseEntity.ok().build();
     }

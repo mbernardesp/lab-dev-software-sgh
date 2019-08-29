@@ -234,7 +234,7 @@ public class RoomDao implements IRoomDao {
     }
 
     @Override
-    public void delete(Room room) {
+    public void delete(long id) {
 
         Connection conn = null;
         PreparedStatement stmt = null;
@@ -246,7 +246,7 @@ public class RoomDao implements IRoomDao {
             conn.setAutoCommit(false);
 
             stmt = conn.prepareStatement(sql);
-            stmt.setLong(1, room.getId());
+            stmt.setLong(1, id);
 
             stmt.execute();
             conn.commit();

@@ -5,13 +5,10 @@
  */
 package br.fai.lds.sgh.controller;
 
-import br.fai.lds.sgh.database.dao.IGuestDao;
-import br.fai.lds.sgh.database.entity.Guest;
-import java.util.ArrayList;
+import br.fai.lds.sgh.database.dao.IRoomProductDao;
+import br.fai.lds.sgh.database.entity.RoomProduct;
 import java.util.List;
-import javax.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -28,82 +25,80 @@ import org.springframework.web.bind.annotation.RestController;
  * @author Marcelo
  */
 @RestController
-@RequestMapping("/api/v1/guest")
+@RequestMapping("/api/v1/room")
 @CrossOrigin(origins = "*")
-public class GuestController {
+public class RoomProductController {
 
     @Autowired
-    IGuestDao guestDao;
-
-    @PostConstruct
-    private void testInject() {
-        System.out.println("Objeto: " + guestDao);
-   }
+    IRoomProductDao roomProductDao;
 
     /**
-     * Create guest
+     * Create roomProduct
      *
+     * @param roomProduct
      * @return ResponseEntity
      */
     @PostMapping
-    public ResponseEntity create(@RequestBody Guest guest) {
+    public ResponseEntity create(@RequestBody RoomProduct roomProduct) {
 
-        guestDao.create(guest);
-
-        return ResponseEntity.status(HttpStatus.CREATED).build();
-    }
-
-    /**
-     * Read guest by id
-     *
-     * @return ResponseEntity
-     */
-    @GetMapping("/read/{id}")
-    public ResponseEntity readById(@PathVariable("id") Long id) {
-
-        Guest guest = guestDao.readById(id);
-
-        return ResponseEntity.ok(guest);
-    }
-
-    /**
-     * Read all guests
-     *
-     * @return ResponseEntity
-     */
-    @GetMapping("/read")
-    public ResponseEntity<List<Guest>> readAll() {
-
-        List<Guest> guestList = new ArrayList<>();
-
-        guestList = guestDao.readAll();
-
-        return ResponseEntity.ok(guestList);
-    }
-
-    /**
-     * Update guest by id
-     *
-     * @return ResponseEntity
-     */
-    @PutMapping("/update/{id}")
-    public ResponseEntity update(@RequestBody Guest guest) {
-
-        guestDao.update(guest);
+        roomProductDao.create(roomProduct);
 
         return ResponseEntity.ok().build();
     }
 
     /**
-     * Delete guest by id
+     * Read roomProduct by id
      *
-     * @param id Identifier of the guest
+     * @param idRoom
+     * @param idProduct
+     * @return ResponseEntity
+     */
+    @GetMapping("/read/{id}")
+    public ResponseEntity readById(@PathVariable("idRoom") long idRoom, @PathVariable("idProduct") long idProduct) {
+
+        RoomProduct roomProduct = roomProductDao.readById(idRoom, idProduct);
+
+        return ResponseEntity.ok(roomProduct);
+    }
+
+    /**
+     * Read all roomProducts
+     *
+     * @return ResponseEntity
+     */
+    @GetMapping("/read")
+    public ResponseEntity<List<RoomProduct>> readAll() {
+
+        List<RoomProduct> roomProductList = roomProductDao.readAll();
+
+        return ResponseEntity.ok(roomProductList);
+    }
+
+    /**
+     * Update roomProduct by id
+     *
+     * @param roomProduct
+     * @return ResponseEntity
+     */
+    @PutMapping("/update")
+    public ResponseEntity update(@RequestBody RoomProduct roomProduct) {
+
+        roomProductDao.update(roomProduct);
+
+        return ResponseEntity.ok().build();
+    }
+
+    /**
+     * Delete roomProduct by id
+     *
+     * @param idRoom
+     * @param idProduct
      * @return ResponseEntity
      */
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity delete(@PathVariable("id") long id) {
+    public ResponseEntity delete(@PathVariable("idRoom") long idRoom, @PathVariable("idProduct") long idProduct) {
 
-        guestDao.deleteById(id);
+        roomProductDao.delete(idRoom, idProduct);
 
         return ResponseEntity.ok().build();
     }
