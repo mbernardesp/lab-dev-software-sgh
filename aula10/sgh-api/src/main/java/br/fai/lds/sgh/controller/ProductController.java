@@ -25,7 +25,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @author Marcelo
  */
 @RestController
-@RequestMapping("/api/v1/room")
+@RequestMapping("/api/v1/product")
 @CrossOrigin(origins = "*")
 public class ProductController {
 

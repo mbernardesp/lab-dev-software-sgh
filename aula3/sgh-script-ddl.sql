@@ -43,7 +43,7 @@ UNIQUE(cpf);
 CREATE TABLE product
 (
     id BIGSERIAL,
-    _code VARCHAR(20),
+    _code VARCHAR(20) NOT NULL,
     _name VARCHAR(100) NOT NULL,
     PRIMARY KEY(id)
 );
@@ -56,9 +56,9 @@ UNIQUE(_code);
 
 CREATE TABLE room_product
 (
-    id_room BIGINT,
-    id_product BIGINT,
-    amount INT,
+    id_room BIGINT NOT NULL,
+    id_product BIGINT NOT NULL,
+    amount INT NOT NULL,
     PRIMARY KEY(id_room, id_product)
 );
 

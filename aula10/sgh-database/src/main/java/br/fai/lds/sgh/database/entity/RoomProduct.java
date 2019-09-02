@@ -11,40 +11,40 @@ package br.fai.lds.sgh.database.entity;
  */
 public class RoomProduct {
     
-    private long id_room;
-    private long id_product;
-    private int amount;
+    private Long id_room;
+    private Long id_product;
+    private Integer amount;
 
     public RoomProduct() {
     }
 
-    public RoomProduct(long id_room, long id_product, int amount) {
+    public RoomProduct(Long id_room, Long id_product, Integer amount) {
         this.id_room = id_room;
         this.id_product = id_product;
         this.amount = amount;
     }
 
-    public long getId_room() {
+    public Long getId_room() {
         return id_room;
     }
 
-    public void setId_room(long id_room) {
+    public void setId_room(Long id_room) {
         this.id_room = id_room;
     }
 
-    public long getId_product() {
+    public Long getId_product() {
         return id_product;
     }
 
-    public void setId_product(long id_product) {
+    public void setId_product(Long id_product) {
         this.id_product = id_product;
     }
 
-    public int getAmount() {
+    public Integer getAmount() {
         return amount;
     }
 
-    public void setAmount(int amount) {
+    public void setAmount(Integer amount) {
         this.amount = amount;
     }
 
@@ -52,5 +52,4 @@ public class RoomProduct {
     public String toString() {
         return "RoomProduct{" + "id_room=" + id_room + ", id_product=" + id_product + ", amount=" + amount + '}';
     }
-    
 }

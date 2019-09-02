@@ -91,7 +91,6 @@ public class RoomProductDao implements IRoomProductDao {
                 roomProduct.setId_product(rs.getLong("id_product"));
                 roomProduct.setAmount(rs.getInt("amount"));                
 
-                // adicionando o objeto à lista
                 roomProductList.add(roomProduct);
             }
 

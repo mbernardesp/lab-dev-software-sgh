@@ -98,7 +98,6 @@ public class RoomDao implements IRoomDao {
                 room.setDateCheckIn(rs.getTimestamp("date_checkin"));
                 room.setDateCheckOut(rs.getTimestamp("date_checkout"));
 
-                // adicionando o objeto à lista
                 roomList.add(room);
             }
 

@@ -14,6 +14,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import br.fai.lds.sgh.database.dao.IGuestDao;
+import java.sql.Types;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -29,22 +30,23 @@ public class GuestDao implements IGuestDao {
         Connection conn = null;
         PreparedStatement stmt = null;
 
-        String sql = "INSERT INTO guest (id, id_room, _name, age, phone) VALUES(nextval('guest_id_seq'), ?, ?, ?, ?)";
+        String sql = "INSERT INTO guest (id, id_room, _name, age, cpf, phone) VALUES(nextval('guest_id_seq'), null, ?, ?, ?, ?)";
 
         try {
             conn = ConnectionFactory.getConnection();
             conn.setAutoCommit(false);
 
             stmt = conn.prepareStatement(sql);
-            stmt.setLong(1, guest.getIdRoom());
-            stmt.setString(2, guest.getName());
-            stmt.setInt(3, guest.getAge());
+            stmt.setString(1, guest.getName());
+            stmt.setInt(2, guest.getAge());
+            stmt.setString(3, guest.getCpf());
             stmt.setString(4, guest.getPhone());
 
             stmt.execute();
 
             conn.commit();
         } catch (SQLException e) {
+            e.printStackTrace();
 
             try {
                 conn.rollback();
@@ -92,9 +94,9 @@ public class GuestDao implements IGuestDao {
                 guest.setIdRoom(rs.getLong("id_room"));
                 guest.setName(rs.getString("_name"));
                 guest.setAge(rs.getInt("age"));
+                guest.setCpf(rs.getString("cpf"));
                 guest.setPhone(rs.getString("phone"));
 
-                // adicionando o objeto à lista
                 guestList.add(guest);
             }
 
@@ -127,7 +129,7 @@ public class GuestDao implements IGuestDao {
     }
 
     @Override
-    public Guest readById(long id) {
+    public Guest readById(Long id) {
 
         Guest guest = null;
 
@@ -149,6 +151,7 @@ public class GuestDao implements IGuestDao {
                 guest.setIdRoom(rs.getLong("id_room"));
                 guest.setName(rs.getString("_name"));
                 guest.setAge(rs.getInt("age"));
+                guest.setCpf(rs.getString("cpf"));
                 guest.setPhone(rs.getString("phone"));
             }
 
@@ -187,18 +190,27 @@ public class GuestDao implements IGuestDao {
         Connection conn = null;
         PreparedStatement stmt = null;
 
-        String sql = "UPDATE guest SET id_room = ?, _name = ?, age = ?, phone = ? WHERE id = ?";
+        String sql = "UPDATE guest SET id_room = ?, _name = ?, age = ?, cpf = ?, phone = ? WHERE id = ?";
 
         try {
             conn = ConnectionFactory.getConnection();
             conn.setAutoCommit(false);
 
             stmt = conn.prepareStatement(sql);
-            stmt.setLong(1, guest.getIdRoom());
-            stmt.setString(2, guest.getName());
-            stmt.setInt(3, guest.getAge());
-            stmt.setString(4, guest.getPhone());
-            stmt.setLong(5, guest.getId());
+           
+            if(guest.getIdRoom() != null){
+                
+                stmt.setLong(1, guest.getIdRoom());                
+            }else{
+                
+                stmt.setNull(1, Types.BIGINT);              
+            }
+            
+            stmt.setString(2, guest.getName());            
+            stmt.setInt(3, guest.getAge());            
+            stmt.setString(4, guest.getCpf());
+            stmt.setString(5, guest.getPhone());            
+            stmt.setLong(6, guest.getId());
 
             stmt.execute();
             conn.commit();
@@ -228,7 +240,7 @@ public class GuestDao implements IGuestDao {
     }
 
     @Override
-    public void delete(long id) {
+    public void delete(Long id) {
 
         Connection conn = null;
         PreparedStatement stmt = null;

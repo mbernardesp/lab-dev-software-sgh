@@ -97,7 +97,7 @@ public class GuestController {
      * @return ResponseEntity
      */
     @DeleteMapping("/delete/{id}")
-    public ResponseEntity delete(@PathVariable("id") long id) {
+    public ResponseEntity delete(@PathVariable("id") Long id) {
 
         guestDao.delete(id);
 

@@ -18,10 +18,10 @@ public interface IProductDao {
     
     public List<Product> readAll();
 
-    public Product readById(long id);
+    public Product readById(Long id);
 
     public void update(Product product);
 
-    public void delete(long id);
+    public void delete(Long id);
     
 }

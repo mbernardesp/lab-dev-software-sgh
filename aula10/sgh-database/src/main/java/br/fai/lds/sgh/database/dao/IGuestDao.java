@@ -18,9 +18,9 @@ public interface IGuestDao {
     
     public List<Guest> readAll();
 
-    public Guest readById(long id);
+    public Guest readById(Long id);
 
     public void update(Guest guest);
 
-    public void delete(long id);
+    public void delete(Long id);
 }

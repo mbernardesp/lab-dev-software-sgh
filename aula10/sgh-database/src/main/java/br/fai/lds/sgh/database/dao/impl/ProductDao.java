@@ -90,7 +90,6 @@ public class ProductDao implements IProductDao {
                 product.setCode(rs.getString("_code"));                
                 product.setName(rs.getString("_name"));                
 
-                // adicionando o objeto à lista
                 productList.add(product);
             }
 
@@ -123,7 +122,7 @@ public class ProductDao implements IProductDao {
     }
 
     @Override
-    public Product readById(long id) {
+    public Product readById(Long id) {
 
         Product product = null;
 
@@ -220,7 +219,7 @@ public class ProductDao implements IProductDao {
     }
 
     @Override
-    public void delete(long id) {
+    public void delete(Long id) {
 
         Connection conn = null;
         PreparedStatement stmt = null;

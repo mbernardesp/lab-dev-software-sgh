@@ -36,7 +36,7 @@ public class Main {
         
         //------------------------------
         
-        Guest guest = guestDao.readById(5);
+        Guest guest = guestDao.readById(5L);
         guest.setName("Marcelo");        
         guestDao.update(guest);
 
