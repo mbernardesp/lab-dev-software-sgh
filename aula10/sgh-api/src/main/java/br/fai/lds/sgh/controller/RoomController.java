@@ -100,4 +100,18 @@ public class RoomController {
 
         return ResponseEntity.ok().build();
     }
+
+    /**
+     * Read rooms by name
+     *
+     * @param num
+     * @return ResponseEntity
+     */
+    @GetMapping("/read/{num}")
+    public ResponseEntity<List<Room>> readByNum(@PathVariable String num) {
+
+        List<Room> roomList = roomDao.readByNum(num);
+
+        return ResponseEntity.ok(roomList);
+    }
 }

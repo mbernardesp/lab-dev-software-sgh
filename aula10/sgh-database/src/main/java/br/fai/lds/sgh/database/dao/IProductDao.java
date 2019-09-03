@@ -17,6 +17,8 @@ public interface IProductDao {
     public void create(Product product);
     
     public List<Product> readAll();
+    
+    public List<Product> readByName(String name);
 
     public Product readById(Long id);
 

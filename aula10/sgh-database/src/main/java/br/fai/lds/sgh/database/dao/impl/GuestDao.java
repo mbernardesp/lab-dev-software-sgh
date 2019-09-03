@@ -30,17 +30,18 @@ public class GuestDao implements IGuestDao {
         Connection conn = null;
         PreparedStatement stmt = null;
 
-        String sql = "INSERT INTO guest (id, id_room, _name, age, cpf, phone) VALUES(nextval('guest_id_seq'), null, ?, ?, ?, ?)";
+        String sql = "INSERT INTO guest (id, id_room, _name, age, cpf, phone) VALUES(nextval('guest_id_seq'), ?, ?, ?, ?, ?)";
 
         try {
             conn = ConnectionFactory.getConnection();
             conn.setAutoCommit(false);
 
             stmt = conn.prepareStatement(sql);
-            stmt.setString(1, guest.getName());
-            stmt.setInt(2, guest.getAge());
-            stmt.setString(3, guest.getCpf());
-            stmt.setString(4, guest.getPhone());
+            stmt.setNull(1, Types.BIGINT);
+            stmt.setString(2, guest.getName());
+            stmt.setInt(3, guest.getAge());
+            stmt.setString(4, guest.getCpf());
+            stmt.setString(5, guest.getPhone());
 
             stmt.execute();
 
@@ -83,7 +84,7 @@ public class GuestDao implements IGuestDao {
         try {
             conn = ConnectionFactory.getConnection();
 
-            stmt = conn.prepareStatement("SELECT * from guest");
+            stmt = conn.prepareStatement("SELECT * FROM guest");
 
             rs = stmt.executeQuery();
 
@@ -197,19 +198,19 @@ public class GuestDao implements IGuestDao {
             conn.setAutoCommit(false);
 
             stmt = conn.prepareStatement(sql);
-           
-            if(guest.getIdRoom() != null){
-                
-                stmt.setLong(1, guest.getIdRoom());                
-            }else{
-                
-                stmt.setNull(1, Types.BIGINT);              
+
+            if (guest.getIdRoom() != null) {
+
+                stmt.setLong(1, guest.getIdRoom());
+            } else {
+
+                stmt.setNull(1, Types.BIGINT);
             }
-            
-            stmt.setString(2, guest.getName());            
-            stmt.setInt(3, guest.getAge());            
+
+            stmt.setString(2, guest.getName());
+            stmt.setInt(3, guest.getAge());
             stmt.setString(4, guest.getCpf());
-            stmt.setString(5, guest.getPhone());            
+            stmt.setString(5, guest.getPhone());
             stmt.setLong(6, guest.getId());
 
             stmt.execute();
@@ -278,5 +279,70 @@ public class GuestDao implements IGuestDao {
             } catch (SQLException ex) {
             }
         }
+    }
+
+    @Override
+    public List<Guest> readByName(String name) {
+
+        List<Guest> guestList = new ArrayList<>();
+
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+
+        try {
+            conn = ConnectionFactory.getConnection();
+
+            if (name != null && !name.isEmpty()) {
+
+                stmt = conn.prepareStatement("SELECT * FROM guest WHERE _name LIKE '%?%'");
+                stmt.setString(1, name);
+            } else {
+
+                stmt = conn.prepareStatement("SELECT * FROM guest");
+            }
+
+            rs = stmt.executeQuery();
+
+            while (rs.next()) {
+
+                Guest guest = new Guest();
+                guest.setId(rs.getLong("id"));
+                guest.setIdRoom(rs.getLong("id_room"));
+                guest.setName(rs.getString("_name"));
+                guest.setAge(rs.getInt("age"));
+                guest.setCpf(rs.getString("cpf"));
+                guest.setPhone(rs.getString("phone"));
+
+                guestList.add(guest);
+            }
+
+        } catch (SQLException ex) {
+        } finally {
+
+            try {
+                if (!rs.isClosed()) {
+                    rs.close();
+                }
+            } catch (SQLException ex) {
+            }
+
+            try {
+                if (!stmt.isClosed()) {
+                    stmt.close();
+                }
+            } catch (SQLException ex) {
+            }
+
+            try {
+                if (!conn.isClosed()) {
+                    conn.close();
+                }
+            } catch (SQLException ex) {
+            }
+        }
+
+        return guestList;
+
     }
 }

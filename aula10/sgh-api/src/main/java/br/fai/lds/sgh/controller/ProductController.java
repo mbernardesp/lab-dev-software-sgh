@@ -100,4 +100,19 @@ public class ProductController {
 
         return ResponseEntity.ok().build();
     }
+    
+        /**
+     * Read products by name
+     *
+     * @param name
+     * @return ResponseEntity
+     */
+    @GetMapping("/read/{name}")
+    public ResponseEntity<List<Product>> readByName(@PathVariable String name) {
+
+        List<Product> productList = productDao.readByName(name);
+
+        return ResponseEntity.ok(productList);
+    }
+
 }

@@ -103,4 +103,19 @@ public class GuestController {
 
         return ResponseEntity.ok().build();
     }
+
+    /**
+     * Read guests by name
+     *
+     * @param name
+     * @return ResponseEntity
+     */
+    @GetMapping("/read/{name}")
+    public ResponseEntity<List<Guest>> readByName(@PathVariable String name) {
+
+        List<Guest> guestList = guestDao.readByName(name);
+
+        return ResponseEntity.ok(guestList);
+    }
+
 }

@@ -18,6 +18,8 @@ public interface IGuestDao {
     
     public List<Guest> readAll();
 
+    public List<Guest> readByName(String name);
+
     public Guest readById(Long id);
 
     public void update(Guest guest);

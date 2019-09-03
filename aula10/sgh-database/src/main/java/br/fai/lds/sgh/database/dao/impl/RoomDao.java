@@ -84,17 +84,17 @@ public class RoomDao implements IRoomDao {
         try {
             conn = ConnectionFactory.getConnection();
 
-            stmt = conn.prepareStatement("SELECT * from room");
-            
+            stmt = conn.prepareStatement("SELECT * FROM room");
+
             rs = stmt.executeQuery();
 
             while (rs.next()) {
 
                 Room room = new Room();
                 room.setId(rs.getLong("id"));
-                room.setNum(rs.getString("num"));                
+                room.setNum(rs.getString("num"));
                 room.setType(EType.valueOf(rs.getString("_type")));
-                room.setStatus(EStatus.valueOf(rs.getString("_status")));                
+                room.setStatus(EStatus.valueOf(rs.getString("_status")));
                 room.setDateCheckIn(rs.getTimestamp("date_checkin"));
                 room.setDateCheckOut(rs.getTimestamp("date_checkout"));
 
@@ -130,7 +130,7 @@ public class RoomDao implements IRoomDao {
     }
 
     @Override
-    public Room readById(long id) {
+    public Room readById(Long id) {
 
         Room room = null;
 
@@ -149,9 +149,9 @@ public class RoomDao implements IRoomDao {
             if (rs.next()) {
                 room = new Room();
                 room.setId(rs.getLong("id"));
-                room.setNum(rs.getString("num"));                
+                room.setNum(rs.getString("num"));
                 room.setType(EType.valueOf(rs.getString("_type")));
-                room.setStatus(EStatus.valueOf(rs.getString("_status")));                
+                room.setStatus(EStatus.valueOf(rs.getString("_status")));
                 room.setDateCheckIn(rs.getTimestamp("date_checkin"));
                 room.setDateCheckOut(rs.getTimestamp("date_checkout"));
             }
@@ -192,7 +192,7 @@ public class RoomDao implements IRoomDao {
         PreparedStatement stmt = null;
 
         String sql = "UPDATE room SET num = ?, _type = ?, _status = ?, date_checkin = ?, date_checkout = ? WHERE id = ?";
-        
+
         try {
             conn = ConnectionFactory.getConnection();
             conn.setAutoCommit(false);
@@ -233,7 +233,7 @@ public class RoomDao implements IRoomDao {
     }
 
     @Override
-    public void delete(long id) {
+    public void delete(Long id) {
 
         Connection conn = null;
         PreparedStatement stmt = null;
@@ -271,5 +271,70 @@ public class RoomDao implements IRoomDao {
             } catch (SQLException ex) {
             }
         }
+    }
+
+    @Override
+    public List<Room> readByNum(String num) {
+
+        List<Room> roomList = new ArrayList<>();
+
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+
+        try {
+            conn = ConnectionFactory.getConnection();
+
+            if (num != null && !num.isEmpty()) {
+
+                stmt = conn.prepareStatement("SELECT * FROM room WHERE num LIKE %?%");
+                stmt.setString(1, num);
+            } else {
+
+                stmt = conn.prepareStatement("SELECT * FROM room");
+            }
+
+            rs = stmt.executeQuery();
+
+            while (rs.next()) {
+
+                Room room = new Room();
+                room.setId(rs.getLong("id"));
+                room.setNum(rs.getString("num"));
+                room.setType(EType.valueOf(rs.getString("_type")));
+                room.setStatus(EStatus.valueOf(rs.getString("_status")));
+                room.setDateCheckIn(rs.getTimestamp("date_checkin"));
+                room.setDateCheckOut(rs.getTimestamp("date_checkout"));
+
+                roomList.add(room);
+            }
+
+        } catch (SQLException ex) {
+        } finally {
+
+            try {
+                if (!rs.isClosed()) {
+                    rs.close();
+                }
+            } catch (SQLException ex) {
+            }
+
+            try {
+                if (!stmt.isClosed()) {
+                    stmt.close();
+                }
+            } catch (SQLException ex) {
+            }
+
+            try {
+                if (!conn.isClosed()) {
+                    conn.close();
+                }
+            } catch (SQLException ex) {
+            }
+        }
+
+        return roomList;
+
     }
 }

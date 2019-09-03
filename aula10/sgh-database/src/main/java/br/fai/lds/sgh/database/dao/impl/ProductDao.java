@@ -79,16 +79,16 @@ public class ProductDao implements IProductDao {
         try {
             conn = ConnectionFactory.getConnection();
 
-            stmt = conn.prepareStatement("SELECT * from product");
-            
+            stmt = conn.prepareStatement("SELECT * FROM product");
+
             rs = stmt.executeQuery();
 
             while (rs.next()) {
 
                 Product product = new Product();
                 product.setId(rs.getLong("id"));
-                product.setCode(rs.getString("_code"));                
-                product.setName(rs.getString("_name"));                
+                product.setCode(rs.getString("_code"));
+                product.setName(rs.getString("_name"));
 
                 productList.add(product);
             }
@@ -141,8 +141,8 @@ public class ProductDao implements IProductDao {
             if (rs.next()) {
                 product = new Product();
                 product.setId(rs.getLong("id"));
-                product.setCode(rs.getString("_code"));                
-                product.setName(rs.getString("_name"));                
+                product.setCode(rs.getString("_code"));
+                product.setName(rs.getString("_name"));
             }
 
         } catch (SQLException ex) {
@@ -257,5 +257,67 @@ public class ProductDao implements IProductDao {
             } catch (SQLException ex) {
             }
         }
+    }
+
+    @Override
+    public List<Product> readByName(String name) {
+
+        List<Product> productList = new ArrayList<>();
+
+        Connection conn = null;
+        PreparedStatement stmt = null;
+        ResultSet rs = null;
+
+        try {
+            conn = ConnectionFactory.getConnection();
+
+            if (name != null && !name.isEmpty()) {
+
+                stmt = conn.prepareStatement("SELECT * FROM product WHERE _name LIKE %?%");
+                stmt.setString(1, name);
+            } else {
+
+                stmt = conn.prepareStatement("SELECT * FROM product");
+            }
+
+            rs = stmt.executeQuery();
+
+            while (rs.next()) {
+
+                Product product = new Product();
+                product.setId(rs.getLong("id"));
+                product.setCode(rs.getString("_code"));
+                product.setName(rs.getString("_name"));
+
+                productList.add(product);
+            }
+
+        } catch (SQLException ex) {
+        } finally {
+
+            try {
+                if (!rs.isClosed()) {
+                    rs.close();
+                }
+            } catch (SQLException ex) {
+            }
+
+            try {
+                if (!stmt.isClosed()) {
+                    stmt.close();
+                }
+            } catch (SQLException ex) {
+            }
+
+            try {
+                if (!conn.isClosed()) {
+                    conn.close();
+                }
+            } catch (SQLException ex) {
+            }
+        }
+
+        return productList;
+
     }
 }
