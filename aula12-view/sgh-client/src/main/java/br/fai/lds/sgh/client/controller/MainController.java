@@ -20,9 +20,9 @@ public class MainController {
     @GetMapping("/")
     public String index(Model model) {
 
-        String message = "SGH - Sistema gerenciador hoteleiro";
+        String msg = "SGH - Sistema gerenciador hoteleiro";
 
-        model.addAttribute("message", message);
+        model.addAttribute("msg", msg);
 
         return "index";
     }

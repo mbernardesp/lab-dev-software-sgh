@@ -56,10 +56,7 @@ public class GuestController {
     @GetMapping("/read/{id}")
     public ResponseEntity readById(@PathVariable("id") Long id) {
 
-        Guest guest = new Guest();
-        guest.setName("Marcelo!!!!");
-             
-        //Guest guest = guestDao.readById(id);
+        Guest guest = guestDao.readById(id);
 
         return ResponseEntity.ok(guest);
     }
