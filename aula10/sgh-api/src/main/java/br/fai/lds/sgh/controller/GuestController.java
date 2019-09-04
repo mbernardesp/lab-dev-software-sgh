@@ -56,7 +56,10 @@ public class GuestController {
     @GetMapping("/read/{id}")
     public ResponseEntity readById(@PathVariable("id") Long id) {
 
-        Guest guest = guestDao.readById(id);
+        Guest guest = new Guest();
+        guest.setName("Marcelo!!!!");
+             
+        //Guest guest = guestDao.readById(id);
 
         return ResponseEntity.ok(guest);
     }
@@ -110,7 +113,7 @@ public class GuestController {
      * @param name
      * @return ResponseEntity
      */
-    @GetMapping("/read/{name}")
+    @GetMapping("/read/name/{name}")
     public ResponseEntity<List<Guest>> readByName(@PathVariable String name) {
 
         List<Guest> guestList = guestDao.readByName(name);

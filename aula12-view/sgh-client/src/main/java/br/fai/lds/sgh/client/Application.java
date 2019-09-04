@@ -5,8 +5,10 @@
  */
 package br.fai.lds.sgh.client;
 
+import br.fai.lds.sgh.client.pojo.Guest;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.web.client.RestTemplate;
 
 /**
  *
@@ -20,6 +22,12 @@ public class Application {
      */
     public static void main(String[] args) {
         SpringApplication.run(Application.class, args);
+        
+        RestTemplate restTemplate = new RestTemplate();
+        Guest guest = restTemplate.getForObject("http://localhost:9005/sgh/api/v1/guest/read/1", Guest.class);
+        System.out.println(guest);
+
+
     }
     
 }

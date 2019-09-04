@@ -11,16 +11,16 @@ package br.fai.lds.sgh.client.pojo;
  */
 public class Guest {
 
-    private long id;
-    private long idRoom;
+    private Long id;
+    private Long idRoom;
     private String name;
-    private int age;
+    private Integer age;
     private String phone;
 
     public Guest() {
     }
 
-    public Guest(long id, long idRoom, String name, int age, String phone) {
+    public Guest(Long id, Long idRoom, String name, Integer age, String phone) {
         this.id = id;
         this.idRoom = idRoom;
         this.name = name;
@@ -28,19 +28,19 @@ public class Guest {
         this.phone = phone;
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
-    public long getIdRoom() {
+    public Long getIdRoom() {
         return idRoom;
     }
 
-    public void setIdRoom(long idRoom) {
+    public void setIdRoom(Long idRoom) {
         this.idRoom = idRoom;
     }
 
@@ -52,11 +52,11 @@ public class Guest {
         this.name = name;
     }
 
-    public int getAge() {
+    public Integer getAge() {
         return age;
     }
 
-    public void setAge(int age) {
+    public void setAge(Integer age) {
         this.age = age;
     }
 
@@ -72,5 +72,4 @@ public class Guest {
     public String toString() {
         return "Guest{" + "id=" + id + ", idRoom=" + idRoom + ", name=" + name + ", age=" + age + ", phone=" + phone + '}';
     }
-
 }

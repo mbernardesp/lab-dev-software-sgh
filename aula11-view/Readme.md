@@ -9,9 +9,8 @@ spring.mvc.view.prefix=/WEB-INF/jsp/
 spring.mvc.view.suffix=.jsp 
 
 
+#Implementar o acesso a primeira página
+index.jsp
 
-
-
-
-#Consumo de apis
-Utilizar o retrofit
+#Classe de troca de informações entre view e controller
+Model
