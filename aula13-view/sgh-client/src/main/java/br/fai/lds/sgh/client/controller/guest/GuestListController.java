@@ -8,7 +8,6 @@ package br.fai.lds.sgh.client.controller.guest;
 import br.fai.lds.sgh.client.pojo.Search;
 import br.fai.lds.sgh.database.dao.IGuestDao;
 import br.fai.lds.sgh.database.entity.Guest;
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,10 +50,22 @@ public class GuestListController {
         return "guest/list";
     }
 
-    @PostMapping("/guest/delete/{id}")
-    public String delete(@PathVariable Long id) {
+    @GetMapping("/guest/edit/{id}")
+    public String edit(@PathVariable("id") Long id, Model model) {
 
-        return "guest/list";
+        Guest guest = guestDao.readById(id);
+  
+        model.addAttribute("guest", guest);
+
+        return "guest/edit";
+    }
+
+    @GetMapping("/guest/delete/{id}")
+    public String delete(@PathVariable("id") Long id, Model model) {
+
+        guestDao.delete(id);
+
+        return "redirect:/guest/list";
     }
 
 }

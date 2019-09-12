@@ -6,6 +6,7 @@
 package br.fai.lds.sgh.client.controller.guest;
 
 import br.fai.lds.sgh.client.validator.GuestFormValidator;
+import br.fai.lds.sgh.database.dao.IGuestDao;
 import br.fai.lds.sgh.database.entity.Guest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,7 +14,6 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -28,19 +28,12 @@ public class GuestFormController {
     @Autowired
     GuestFormValidator guestValidator;
 
+    @Autowired
+    IGuestDao guestDao;
+
     @InitBinder
     protected void initBinder(WebDataBinder binder) {
         binder.setValidator(guestValidator);
-    }
-    @GetMapping("/guest/edit")
-    public String edit(Model model) {
-
-        Guest guest = new Guest();
-        guest.setName("João");
-
-        model.addAttribute("guest", guest);
-
-        return "guest/edit";
     }
 
     @PostMapping("/guest/save")
@@ -52,7 +45,10 @@ public class GuestFormController {
 
         } else {
 
+            guestDao.update(guest);
+            
             return "redirect:/guest/list";
         }
     }
+
 }

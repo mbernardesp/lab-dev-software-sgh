@@ -295,8 +295,8 @@ public class GuestDao implements IGuestDao {
 
             if (name != null && !name.isEmpty()) {
 
-                stmt = conn.prepareStatement("SELECT * FROM guest WHERE _name LIKE '%?%'");
-                stmt.setString(1, name);
+                stmt = conn.prepareStatement("SELECT * FROM guest WHERE _name LIKE ?");
+                stmt.setString(1, '%' + name + '%');
             } else {
 
                 stmt = conn.prepareStatement("SELECT * FROM guest");

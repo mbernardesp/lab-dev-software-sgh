@@ -287,8 +287,8 @@ public class RoomDao implements IRoomDao {
 
             if (num != null && !num.isEmpty()) {
 
-                stmt = conn.prepareStatement("SELECT * FROM room WHERE num LIKE %?%");
-                stmt.setString(1, num);
+                stmt = conn.prepareStatement("SELECT * FROM room WHERE num LIKE ?");
+                stmt.setString(1, '%' + num + '%');
             } else {
 
                 stmt = conn.prepareStatement("SELECT * FROM room");

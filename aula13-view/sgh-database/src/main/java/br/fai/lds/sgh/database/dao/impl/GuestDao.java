@@ -38,7 +38,7 @@ public class GuestDao implements IGuestDao {
 
             stmt = conn.prepareStatement(sql);
             stmt.setNull(1, Types.BIGINT);
-            stmt.setString(2, guest.getName());
+            stmt.setString(2, guest.getName().toUpperCase());
             stmt.setInt(3, guest.getAge());
             stmt.setString(4, guest.getCpf());
             stmt.setString(5, guest.getPhone());
@@ -207,7 +207,7 @@ public class GuestDao implements IGuestDao {
                 stmt.setNull(1, Types.BIGINT);
             }
 
-            stmt.setString(2, guest.getName());
+            stmt.setString(2, guest.getName().toUpperCase());
             stmt.setInt(3, guest.getAge());
             stmt.setString(4, guest.getCpf());
             stmt.setString(5, guest.getPhone());
@@ -295,8 +295,9 @@ public class GuestDao implements IGuestDao {
 
             if (name != null && !name.isEmpty()) {
 
-                stmt = conn.prepareStatement("SELECT * FROM guest WHERE _name LIKE '%?%'");
-                stmt.setString(1, name);
+                stmt = conn.prepareStatement("SELECT * FROM guest WHERE _name LIKE ?");
+                stmt.setString(1, '%' + name.toUpperCase() + '%');
+                
             } else {
 
                 stmt = conn.prepareStatement("SELECT * FROM guest");
@@ -318,6 +319,8 @@ public class GuestDao implements IGuestDao {
             }
 
         } catch (SQLException ex) {
+            
+            ex.printStackTrace();
         } finally {
 
             try {

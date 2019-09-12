@@ -273,8 +273,8 @@ public class ProductDao implements IProductDao {
 
             if (name != null && !name.isEmpty()) {
 
-                stmt = conn.prepareStatement("SELECT * FROM product WHERE _name LIKE %?%");
-                stmt.setString(1, name);
+                stmt = conn.prepareStatement("SELECT * FROM product WHERE _name LIKE ?");
+                stmt.setString(1, '%' + name + '%');
             } else {
 
                 stmt = conn.prepareStatement("SELECT * FROM product");

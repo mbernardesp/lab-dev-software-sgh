@@ -51,8 +51,8 @@
                 <td>${guest.age}</td>
                 <td>${guest.phone}</td>
                 <td>
-                    <a class="btn btn-info btn-xs" href="${pageContext.request.contextPath}/guest/edit?id=${guest.id}">Edit</a>
-                    <a class="btn btn-danger btn-xs" href="${pageContext.request.contextPath}/guest/delete?id=${guest.id}">Delete</a>
+                    <a class="btn btn-info btn-xs" href="${pageContext.request.contextPath}/guest/edit/${guest.id}">Edit</a>
+                    <a class="btn btn-danger btn-xs" href="${pageContext.request.contextPath}/guest/delete/${guest.id}">Delete</a>
                 </td>
             </tr>
         </c:forEach>
