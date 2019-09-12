@@ -5,10 +5,13 @@
  */
 package br.fai.lds.sgh.client.controller.guest;
 
-import br.fai.lds.sgh.client.pojo.Guest;
 import br.fai.lds.sgh.client.pojo.Search;
+import br.fai.lds.sgh.database.dao.IGuestDao;
+import br.fai.lds.sgh.database.entity.Guest;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,34 +25,31 @@ import org.springframework.web.bind.annotation.PostMapping;
  */
 @Controller
 public class GuestListController {
-  
+
+    @Autowired
+    IGuestDao guestDao;
+
     @GetMapping("guest/list")
     public String getListSearch(@ModelAttribute("search") Search search, Model model) {
-        
-        List<Guest> guestList = new ArrayList<>();
-        guestList.add(new Guest(1L, 2L, "Marcelo", 35, "3592033441"));
-        guestList.add(new Guest(2L, 3L, "Carina", 30, "3534719500"));
 
-        model.addAttribute("guestList", guestList);
+        List<Guest> guestList = guestDao.readAll();
+
+        model.addAttribute("guestList", guestList != null ? guestList : Collections.EMPTY_LIST);
         model.addAttribute("search", search);
 
         return "guest/list";
-    }  
+    }
 
     @PostMapping("guest/list")
     public String search(@ModelAttribute("search") Search search, Model model) {
-        
-        List<Guest> guestList = new ArrayList<>();
-        guestList.add(new Guest(1L, 2L, "Fernando", 35, "3592033441"));
-        guestList.add(new Guest(2L, 3L, "Rita", 30, "3534719500"));
 
-        model.addAttribute("guestList", guestList);
+        List<Guest> guestList = guestDao.readByName(search.getContent());
+
+        model.addAttribute("guestList", guestList != null ? guestList : Collections.EMPTY_LIST);
         model.addAttribute("search", search);
 
         return "guest/list";
-    }  
-    
-
+    }
 
     @PostMapping("/guest/delete/{id}")
     public String delete(@PathVariable Long id) {

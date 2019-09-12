@@ -5,7 +5,7 @@
  */
 package br.fai.lds.sgh.client.validator;
 
-import br.fai.lds.sgh.client.pojo.Guest;
+import br.fai.lds.sgh.database.entity.Guest;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
