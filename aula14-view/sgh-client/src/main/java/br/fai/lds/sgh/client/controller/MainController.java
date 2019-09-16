@@ -17,24 +17,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class MainController {
 
 
-//    @GetMapping("/")
-//    public String index(Model model) {
-//
-//        String msg = "SGH - Sistema gerenciador hoteleiro";
-//
-//        model.addAttribute("msg", msg);
-//
-//        return "index";
-//    }
-    
     @GetMapping("/")
-    public String login(Model model) {
+    public String index(Model model) {
 
-        String msg = "Login";
+        String msg = "SGH - Sistema gerenciador hoteleiro";
 
         model.addAttribute("msg", msg);
 
-        return "login/login";
+        return "index";
     }
 
 }
