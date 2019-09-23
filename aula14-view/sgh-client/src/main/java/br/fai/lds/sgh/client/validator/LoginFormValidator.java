@@ -5,7 +5,10 @@
  */
 package br.fai.lds.sgh.client.validator;
 
-import br.fai.lds.sgh.database.entity.Guest;
+import br.fai.lds.sgh.client.pojo.Login;
+import br.fai.lds.sgh.database.dao.IUserDao;
+import br.fai.lds.sgh.database.entity.User;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.ValidationUtils;
@@ -16,27 +19,40 @@ import org.springframework.validation.Validator;
  * @author marcelo
  */
 @Component
-public class GuestFormValidator implements Validator {
+public class LoginFormValidator implements Validator {
+
+    @Autowired
+    IUserDao userDao;
 
     @Override
     public boolean supports(Class<?> type) {
-        return Guest.class.equals(type);
+        return Login.class.equals(type);
     }
 
     @Override
     public void validate(Object target, Errors errors) {
 
-        Guest guest = (Guest) target;
+//        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "user", "");
+//        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "pass", "");
 
-        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "name", "");
+        Login login = (Login) target;
 
-        if (guest.getAge() == null || guest.getAge() <= 0) {
-            errors.rejectValue("age", "");
+        if (login.getUser() == null || login.getUser().isEmpty()) {
+
+            errors.rejectValue("user", "");
+
+        } else if (login.getPass() == null || login.getPass().isEmpty()) {
+
+            errors.rejectValue("pass", "");
+
+        } else {
+            
+            User user = userDao.readByUserNameAndPass(login.getUser(), login.getPass());
+
+            if (user == null) {
+
+                errors.rejectValue("msg", "");
+            }
         }
-        
-        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "phone", "");
-
-
     }
-
 }

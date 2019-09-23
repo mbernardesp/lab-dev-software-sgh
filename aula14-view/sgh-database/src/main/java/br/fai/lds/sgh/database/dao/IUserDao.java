@@ -5,24 +5,28 @@
  */
 package br.fai.lds.sgh.database.dao;
 
-import br.fai.lds.sgh.database.entity.Guest;
+import br.fai.lds.sgh.database.entity.User;
 import java.util.List;
 
 /**
  *
  * @author Marcelo
  */
-public interface IGuestDao {
+public interface IUserDao {
     
-    public void create(Guest guest);
+    public void create(User user);
     
-    public List<Guest> readAll();
+    public List<User> readAll();
 
-    public List<Guest> readByName(String name);
+    public List<User> readByName(String name);
 
-    public Guest readById(Long id);
+    public User readById(Long id);
+    
+    public User readByUserName(String userName);
 
-    public void update(Guest guest);
+    public User readByUserNameAndPass(String userName, String pass);
+
+    public void update(User user);
 
     public void delete(Long id);
 }

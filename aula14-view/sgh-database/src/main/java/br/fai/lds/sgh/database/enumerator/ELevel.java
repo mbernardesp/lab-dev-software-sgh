@@ -9,14 +9,15 @@ package br.fai.lds.sgh.database.enumerator;
  *
  * @author Marcelo
  */
-public enum EType {
+public enum ELevel {
     
-    STD("STD"),
-    LUX("LUX");
+    BASIC("BASIC"),
+    ADVANCED("ADVANCED"),
+    ADMIN("ADMIN");
     
     private String str;
     
-    EType(String str){
+    ELevel(String str){
         this.str = str;
     }
     
