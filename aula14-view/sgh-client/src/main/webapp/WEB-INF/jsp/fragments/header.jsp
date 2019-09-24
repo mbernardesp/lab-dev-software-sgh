@@ -42,6 +42,13 @@
                     </li>
                     <li><a href="#">Check-In</a></li>
                     <li><a href="#">Check-Out</a></li>
+
+                    <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">Services<span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="${pageContext.request.contextPath}/service/address">Find address</a></li>
+                        </ul>
+                    </li>
+
                 </ul>
 
             </div>

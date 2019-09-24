@@ -3,69 +3,54 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.fai.lds.sgh.client.controller.guest;
+package br.fai.lds.sgh.client.controller.service;
 
+import br.fai.lds.sgh.client.pojo.Address;
 import br.fai.lds.sgh.client.pojo.Search;
-import br.fai.lds.sgh.database.dao.IGuestDao;
 import br.fai.lds.sgh.database.entity.Guest;
 import java.util.Collections;
 import java.util.List;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.client.RestTemplate;
 
 /**
  *
  * @author marcelo
  */
 @Controller
-public class GuestListController {
+public class AddressController {
+    
+    @GetMapping("service/address")
+    public String address(@ModelAttribute("search") Search search, Model model) {
 
-    @Autowired
-    IGuestDao guestDao;
+        Address address = new Address();
 
-    @GetMapping("guest/list")
-    public String getListSearch(@ModelAttribute("search") Search search, Model model) {
-
-        List<Guest> guestList = guestDao.readAll();
-
-        model.addAttribute("guestList", guestList != null ? guestList : Collections.EMPTY_LIST);
+        model.addAttribute("address", address != null ? address : new Address());
         model.addAttribute("search", search);
 
-        return "guest/list";
+        return "service/address";
     }
 
-    @PostMapping("guest/list")
-    public String search(@ModelAttribute("search") Search search, Model model) {
+    @PostMapping("service/address")
+    public String addressSearch(@ModelAttribute("search") Search search, Model model) {
 
-        List<Guest> guestList = guestDao.readByName(search.getContent());
+        RestTemplate restTemplate = new RestTemplate();
+        Address address = null;
 
-        model.addAttribute("guestList", guestList != null ? guestList : Collections.EMPTY_LIST);
+        try {
+            address = restTemplate.getForObject("https://viacep.com.br/ws/" + search.getContent() + "/json/", Address.class);
+            System.out.println(address);
+
+        } catch (Exception e) {
+        }
+        
+        model.addAttribute("address", address != null ? address : new Address());
         model.addAttribute("search", search);
 
-        return "guest/list";
+        return "service/address";
     }
-
-    @GetMapping("/guest/edit/{id}")
-    public String edit(@PathVariable("id") Long id, Model model) {
-
-        Guest guest = guestDao.readById(id);
-  
-        model.addAttribute("guest", guest);
-
-        return "guest/edit";
-    }
-
-    @GetMapping("/guest/delete/{id}")
-    public String delete(@PathVariable("id") Long id, Model model) {
-
-        guestDao.delete(id);
-
-        return "redirect:/guest/list";
-    }
-
 }
