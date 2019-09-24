@@ -11,7 +11,6 @@ import br.fai.lds.sgh.database.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
-import org.springframework.validation.ValidationUtils;
 import org.springframework.validation.Validator;
 
 /**
@@ -23,7 +22,7 @@ public class LoginFormValidator implements Validator {
 
     @Autowired
     IUserDao userDao;
-
+    
     @Override
     public boolean supports(Class<?> type) {
         return Login.class.equals(type);
@@ -32,10 +31,9 @@ public class LoginFormValidator implements Validator {
     @Override
     public void validate(Object target, Errors errors) {
 
-//        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "user", "");
-//        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "pass", "");
-
         Login login = (Login) target;
+        
+        User user = null;
 
         if (login.getUser() == null || login.getUser().isEmpty()) {
 
@@ -47,7 +45,7 @@ public class LoginFormValidator implements Validator {
 
         } else {
             
-            User user = userDao.readByUserNameAndPass(login.getUser(), login.getPass());
+            user = userDao.readByUserNameAndPass(login.getUser(), login.getPass());
 
             if (user == null) {
 

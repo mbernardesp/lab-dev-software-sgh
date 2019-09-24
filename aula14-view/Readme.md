@@ -5,7 +5,7 @@ Execução do script DML
 
 #Atualização do banco de dados com
 Criar o Enum ELevel de níveis de usuário
-Criar a entidade Auth
+Criar a entidade Users
 Criar o DAO correspondente
 
 Implementar a View de login

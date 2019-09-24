@@ -7,9 +7,7 @@ package br.fai.lds.sgh.client.controller.service;
 
 import br.fai.lds.sgh.client.pojo.Address;
 import br.fai.lds.sgh.client.pojo.Search;
-import br.fai.lds.sgh.database.entity.Guest;
-import java.util.Collections;
-import java.util.List;
+import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,11 +23,11 @@ import org.springframework.web.client.RestTemplate;
 public class AddressController {
     
     @GetMapping("service/address")
-    public String address(@ModelAttribute("search") Search search, Model model) {
+    public String address(@ModelAttribute("search") Search search, Model model, HttpSession session) {
 
         Address address = new Address();
 
-        model.addAttribute("address", address != null ? address : new Address());
+        model.addAttribute("address", address);
         model.addAttribute("search", search);
 
         return "service/address";

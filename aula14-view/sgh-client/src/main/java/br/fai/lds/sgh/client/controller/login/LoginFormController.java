@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import br.fai.lds.sgh.database.dao.IUserDao;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -37,7 +38,7 @@ public class LoginFormController {
     }
 
     @PostMapping("/login/verify")
-    public String verify(@ModelAttribute("login") @Validated Login login, BindingResult result, Model model) {
+    public String verify(@ModelAttribute("login") @Validated Login login, BindingResult result, Model model, HttpSession session) {
         
         if (result.hasErrors()) {
 
@@ -45,7 +46,11 @@ public class LoginFormController {
 
         } else {
             
-            return "redirect:/guest/list";
+            session.setAttribute("user", login.getUser());
+            
+            model.addAttribute("msg", "SGH Dashboard");
+            
+            return "dashboard";
         }
     }
 
