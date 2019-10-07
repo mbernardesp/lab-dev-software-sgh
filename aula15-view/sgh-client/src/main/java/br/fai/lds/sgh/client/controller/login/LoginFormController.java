@@ -5,6 +5,7 @@
  */
 package br.fai.lds.sgh.client.controller.login;
 
+import br.fai.lds.sgh.client.pojo.Img;
 import br.fai.lds.sgh.client.pojo.Login;
 import br.fai.lds.sgh.client.validator.LoginFormValidator;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -49,9 +50,9 @@ public class LoginFormController {
             session.setAttribute("id", login.getId());
             session.setAttribute("user", login.getUser());
             
-            model.addAttribute("msg", "SGH Dashboard");
-            
-            return "dashboard";
+            //return "dashboard";
+            return "redirect:/dashboard/list";
+
         }
     }
 

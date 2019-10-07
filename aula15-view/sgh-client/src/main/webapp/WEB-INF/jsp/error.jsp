@@ -14,8 +14,8 @@
     <body class="text-center">
         <div class="container">
 
-                User not logged in. Click <a href="${pageContext.request.contextPath}">here</a> to login!
-            
+            User not logged in. Click <a href="${pageContext.request.contextPath}">here</a> to login!
+
         </div> 
     </body>
 </html>

@@ -3,52 +3,73 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.fai.lds.sgh.client.controller.service;
+package br.fai.lds.sgh.client.controller.dashboard;
 
-import br.fai.lds.sgh.client.pojo.Address;
-import br.fai.lds.sgh.client.pojo.Search;
-import javax.servlet.http.HttpSession;
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.Base64;
+import org.apache.commons.io.FileUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.client.RestTemplate;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 /**
  *
  * @author marcelo
  */
 @Controller
-public class AddressController {
-    
-    @GetMapping("service/address")
-    public String address(@ModelAttribute("search") Search search, Model model, HttpSession session) {
+public class DashboardController {
 
-        Address address = new Address();
+    private static String UPLOADED_FOLDER = "/home/marcelo/Pictures/";
 
-        model.addAttribute("address", address);
-        model.addAttribute("search", search);
+    @GetMapping("dashboard/list")
+    public String dashboard(Model model) throws IOException {
 
-        return "service/address";
-    }
-
-    @PostMapping("service/address")
-    public String addressSearch(@ModelAttribute("search") Search search, Model model) {
-
-        RestTemplate restTemplate = new RestTemplate();
-        Address address = null;
-
-        try {
-            address = restTemplate.getForObject("https://viacep.com.br/ws/" + search.getContent() + "/json/", Address.class);
-            System.out.println(address);
-
-        } catch (Exception e) {
-        }
+        model.addAttribute("msg", "SGH Dashboard");
         
-        model.addAttribute("address", address != null ? address : new Address());
-        model.addAttribute("search", search);
+        byte[] fileContent = FileUtils.readFileToByteArray(new File(UPLOADED_FOLDER + "img.png"));
 
-        return "service/address";
+        String encodedString = Base64.getEncoder().encodeToString(fileContent);
+
+        model.addAttribute("base64Image", encodedString);
+
+        
+        return "dashboard";
+
     }
+
+    @PostMapping("dashboard/upload")
+    public String dashboardUpload(@RequestParam("file") MultipartFile file, RedirectAttributes redirectAttributes) throws IOException {
+
+        if (!file.isEmpty()) {
+
+            try {
+
+                // Get the file and save it somewhere
+                byte[] bytes = file.getBytes();
+//                Path path = Paths.get(UPLOADED_FOLDER + file.getOriginalFilename());
+                Path path = Paths.get(UPLOADED_FOLDER + "img.png");
+                Files.write(path, bytes);
+
+                //redirectAttributes.addFlashAttribute("message", "You successfully uploaded '" + file.getOriginalFilename() + "'");
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            return "redirect:/dashboard/list";
+        } else {
+
+        }
+
+        return "redirect:/error";
+
+    }
+
 }

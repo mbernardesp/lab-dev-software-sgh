@@ -45,21 +45,58 @@
             <artifactId>sgh-database</artifactId>
             <version>1.0.0</version>          
         </dependency>
+                       
                             
+        <!--Commons IO-->                    
+        <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+            <version>2.6</version>
+        </dependency>
+
+                                           
     </dependencies>
     
-    <build>        
-        <finalName>${project.name}</finalName>
+    <build>  
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>true</filtering>
+                <includes>
+                    <include>**/*.properties</include>
+                </includes>
+            </resource>
+
+            <resource>
+                <directory>src/main/webapp</directory>
+                <filtering>true</filtering>
+                <includes>
+                    <include>**/*.properties</include>
+                    <include>**/*.jsp</include>
+                    <include>**/*.css</include>
+                    <include>**/*.js</include>
+                </includes>
+            </resource>
+
+        </resources>
         
-        <plugins>            
+        <plugins>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
-                <configuration>
-                    <executable>true</executable>
-                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>repackage</goal>
+                        </goals>
+                        <configuration>
+                            <classifier>spring-boot</classifier>
+                            <mainClass>br.fai.lds.sgh.Application</mainClass>
+                        </configuration>
+                    </execution>
+                </executions>
             </plugin>
-        </plugins>        
+        </plugins>
     </build>    
     
 </project>
