@@ -3,11 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.fai.lds.sgh.client.controller.login;
+package br.fai.lds.sgh.client.controller.guest;
 
-import br.fai.lds.sgh.client.pojo.Img;
-import br.fai.lds.sgh.client.pojo.Login;
-import br.fai.lds.sgh.client.validator.LoginFormValidator;
+import br.fai.lds.sgh.client.validator.GuestFormValidator;
+import br.fai.lds.sgh.database.dao.IGuestDao;
+import br.fai.lds.sgh.database.entity.Guest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,41 +17,37 @@ import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import br.fai.lds.sgh.database.dao.IUserDao;
-import javax.servlet.http.HttpSession;
 
 /**
  *
  * @author marcelo
  */
 @Controller
-public class LoginFormController {
+public class GuestFormController {
 
     @Autowired
-    LoginFormValidator loginFormValidator;
+    GuestFormValidator guestValidator;
 
     @Autowired
-    IUserDao userDao;
+    IGuestDao guestDao;
 
     @InitBinder
     protected void initBinder(WebDataBinder binder) {
-        binder.setValidator(loginFormValidator);
+        binder.setValidator(guestValidator);
     }
 
-    @PostMapping("/login/verify")
-    public String verify(@ModelAttribute("login") @Validated Login login, BindingResult result, Model model, HttpSession session) {
-        
+    @PostMapping("/guest/save")
+    public String save(@ModelAttribute("guest") @Validated Guest guest, BindingResult result, Model model) {
+
         if (result.hasErrors()) {
 
-            return "login/login";
+            return "guest/edit";
 
         } else {
-            
-            session.setAttribute("id", login.getId());
-            session.setAttribute("user", login.getUser());
-            
-            return "redirect:/dashboard/list";
 
+            guestDao.update(guest);
+            
+            return "redirect:/guest/list";
         }
     }
 

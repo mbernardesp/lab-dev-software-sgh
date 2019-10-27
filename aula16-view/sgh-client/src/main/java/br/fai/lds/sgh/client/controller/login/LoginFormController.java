@@ -50,6 +50,7 @@ public class LoginFormController {
             session.setAttribute("id", login.getId());
             session.setAttribute("user", login.getUser());
             
+            //return "dashboard";
             return "redirect:/dashboard/list";
 
         }

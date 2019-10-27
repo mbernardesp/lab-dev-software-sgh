@@ -20,6 +20,8 @@ public class ServiceInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
 
+        System.out.println("URI: " + request.getRequestURI());
+        
         System.out.println("User session: " + request.getSession().getAttribute("user"));
 
         String uri = request.getRequestURI();

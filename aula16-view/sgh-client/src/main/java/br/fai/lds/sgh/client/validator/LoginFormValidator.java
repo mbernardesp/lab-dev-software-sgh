@@ -50,7 +50,7 @@ public class LoginFormValidator implements Validator {
         } else {
             
             //Local authentication
-            user = userDao.readByUserNameAndPass(login.getUser(), login.getPass());
+            //user = userDao.readByUserNameAndPass(login.getUser(), login.getPass());
             
             //Remote authentication
 //            user = userService.verifyRemoteUser(login.getUser(), login.getPass());
@@ -63,6 +63,7 @@ public class LoginFormValidator implements Validator {
 //                login.setId(user.getId());                
 //            }         
 
+              login.setId(1L);
         }
     }
 }

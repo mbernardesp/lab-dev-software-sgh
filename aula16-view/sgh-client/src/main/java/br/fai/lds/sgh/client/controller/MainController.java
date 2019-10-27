@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.fai.lds.sgh.client.controller.dashboard;
+package br.fai.lds.sgh.client.controller;
 
-import java.io.IOException;
+import br.fai.lds.sgh.client.pojo.Login;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,14 +15,15 @@ import org.springframework.web.bind.annotation.GetMapping;
  * @author marcelo
  */
 @Controller
-public class DashboardController {
+public class MainController {
 
-    @GetMapping("dashboard/list")
-    public String dashboard(Model model) throws IOException {
+    @GetMapping("/")
+    public String auth(Model model) {
 
-        model.addAttribute("msg", "SGH Dashboard");
+        model.addAttribute("login", new Login());
 
-        return "dashboard";
-
+        return "login/login";
+        //return "welcome";
     }
+
 }
