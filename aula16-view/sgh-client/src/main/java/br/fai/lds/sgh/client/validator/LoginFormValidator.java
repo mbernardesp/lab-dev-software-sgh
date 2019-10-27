@@ -50,20 +50,19 @@ public class LoginFormValidator implements Validator {
         } else {
             
             //Local authentication
-            //user = userDao.readByUserNameAndPass(login.getUser(), login.getPass());
+            user = userDao.readByUserNameAndPass(login.getUser(), login.getPass());
             
             //Remote authentication
-//            user = userService.verifyRemoteUser(login.getUser(), login.getPass());
-//
-//            if (user == null) {
-//
-//                errors.rejectValue("msg", "");
-//            }else{
-//                
-//                login.setId(user.getId());                
-//            }         
+            //user = userService.verifyRemoteUser(login.getUser(), login.getPass());
 
-              login.setId(1L);
+            if (user == null) {
+
+                errors.rejectValue("msg", "");
+            }else{
+                
+                login.setId(user.getId());                
+            }         
+
         }
     }
 }

@@ -14,14 +14,14 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
  *
  * @author Marcelo
  */
-//@Component
+@Component
 public class ServiceInterceptorAppConfig extends WebMvcConfigurerAdapter {
 
-//    @Autowired
-//    ServiceInterceptor perviceInterceptor;
-//
-//    @Override
-//    public void addInterceptors(InterceptorRegistry registry) {
-//        registry.addInterceptor(perviceInterceptor);
-//    }
+    @Autowired
+    ServiceInterceptor perviceInterceptor;
+
+    @Override
+    public void addInterceptors(InterceptorRegistry registry) {
+        registry.addInterceptor(perviceInterceptor);
+    }
 }

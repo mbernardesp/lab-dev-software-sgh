@@ -23,7 +23,6 @@ public class MainController {
         model.addAttribute("login", new Login());
 
         return "login/login";
-        //return "welcome";
     }
 
 }

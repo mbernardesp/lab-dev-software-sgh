@@ -19,17 +19,19 @@ public class User {
     private String name;
     private String email;
     private ELevel level;
+    private String img;
 
     public User() {
     }
 
-    public User(Long id, String user, String pass, String name, String email, ELevel level) {
+    public User(Long id, String user, String pass, String name, String email, ELevel level, String img) {
         this.id = id;
         this.user = user;
         this.pass = pass;
         this.name = name;
         this.email = email;
         this.level = level;
+        this.img = img;
     }
 
     public Long getId() {
@@ -80,8 +82,16 @@ public class User {
         this.level = level;
     }
 
+    public String getImg() {
+        return img;
+    }
+
+    public void setImg(String img) {
+        this.img = img;
+    }
+
     @Override
     public String toString() {
-        return "Auth{" + "id=" + id + ", user=" + user + ", pass=" + pass + ", name=" + name + ", email=" + email + ", level=" + level + '}';
+        return "User{" + "id=" + id + ", user=" + user + ", pass=" + pass + ", name=" + name + ", email=" + email + ", level=" + level + ", img=" + img + '}';
     }
 }

@@ -40,24 +40,5 @@ public class Application extends SpringBootServletInitializer {
      */
     public static void main(String[] args) {
         SpringApplication.run(Application.class, args);
-
-//        RestTemplate restTemplate = new RestTemplate();
-//        Guest guest = null;
-//
-//        //Read
-//        try {
-//            guest = restTemplate.getForObject("http://192.168.8.128:9005/sgh/api/v1/guest/read/1", Guest.class);
-//            System.out.println(guest);
-//
-//        } catch (Exception e) {
-//        }
-//
-//        //Update
-//        try {
-//            guest.setName("Marcelo Bernardes Pinto");
-//            restTemplate.put("http://192.168.8.128:9005/sgh/api/v1/guest/update", guest);
-//
-//        } catch (Exception e) {
-//        }
     }
 }
