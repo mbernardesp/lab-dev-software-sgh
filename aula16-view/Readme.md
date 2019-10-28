@@ -12,3 +12,6 @@ Arquivos
 
 - Salvar a imagem na base de dados como base64
 - Setar o tamanho maxixo de arquivo permitido para upload
+
+- Filtro apenas para arquivos de imagem
+  	accept=".png, .jpg, .jpeg, .gif"
