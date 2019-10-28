@@ -1,0 +1,3 @@
+INSERT INTO users(_user, pass, _name, email, _level) VALUES ('mbernardesp', 'master', 'Marcelo Bernardes Pinto', 'marcelobernardespinto@gmail.com', 'ADMIN');
+INSERT INTO users(_user, pass, _name, email, _level) VALUES ('test1', 'master', 'User test 1', 'test1@gmail.com', 'ADVANCED');
+INSERT INTO users(_user, pass, _name, email, _level) VALUES ('test2', 'master', 'User test 2', 'test2@gmail.com', 'BASIC');
