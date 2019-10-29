@@ -33,7 +33,7 @@
         </div>
     </div>
 
-    <table class="table table-striped">
+    <table class="table table-striped" id="guest">
         <tr>
             <th>Id</th>
             <th>IdRoom</th>
@@ -57,6 +57,18 @@
             </tr>
         </c:forEach>
     </table>
+
+    <script>
+        $("#guest").tableHTMLExport({
+
+            // csv, txt, json, pdf
+            type: 'json',
+
+            // file name
+            filename: 'sample.json'
+
+        });
+    </script>
 
 </div>
 
