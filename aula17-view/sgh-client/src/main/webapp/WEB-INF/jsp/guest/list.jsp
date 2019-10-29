@@ -40,7 +40,7 @@
             <th>Name</th>
             <th>Age</th>
             <th>Phone</th>
-            <th>Actions</th>
+            <th class="ignore">Actions</th>
 
         </tr>
         <c:forEach  items="${guestList}" var ="guest">
@@ -50,7 +50,7 @@
                 <td>${guest.name}</td>
                 <td>${guest.age}</td>
                 <td>${guest.phone}</td>
-                <td>
+                <td class="ignore">
                     <a class="btn btn-info btn-xs" href="${pageContext.request.contextPath}/guest/edit/${guest.id}">Edit</a>
                     <a class="btn btn-danger btn-xs" href="${pageContext.request.contextPath}/guest/delete/${guest.id}">Delete</a>
                 </td>
@@ -58,16 +58,23 @@
         </c:forEach>
     </table>
 
+    <button class="btn btn-success pull-right h2" type="button" onclick="exportTo()">Export to .csv</button>
+
     <script>
-        $("#guest").tableHTMLExport({
-
-            // csv, txt, json, pdf
-            type: 'json',
-
-            // file name
-            filename: 'sample.json'
-
-        });
+        function exportTo() {
+            $("#guest").tableHTMLExport({
+                type: 'csv',
+                filename: 'export.csv',
+                ignoreColumns: '.ignore',
+                ignoreRows: '.ignore',
+                separator: ',',
+                newline: '\r\n',
+                trimContent: true,
+                quoteFields: true,
+                htmlContent: false,
+                consoleLog: false,
+            });
+        }
     </script>
 
 
