@@ -11,6 +11,11 @@
         <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/font-awesome.min.css"/>
         <script src="${pageContext.request.contextPath}/resources/js/jquery.min.js"></script>
         <script src="${pageContext.request.contextPath}/resources/js/bootstrap.min.js"></script>
+
+        <script src="${pageContext.request.contextPath}/resources/js/tableHTMLExport.js"></script>
+        <script src="${pageContext.request.contextPath}/resources/js/jspdf.min.js"></script>
+        <script src="${pageContext.request.contextPath}/resources/js/jspdf.plugin.autotable.min.js"></script>
+
     </head>
     <body>
 
@@ -50,7 +55,7 @@
                             <li><a href="${pageContext.request.contextPath}/guest/report">Guest</a></li>
                         </ul>
                     </li>
-                    
+
                     <li><a href="#">Check-In</a></li>
                     <li><a href="#">Check-Out</a></li>
 

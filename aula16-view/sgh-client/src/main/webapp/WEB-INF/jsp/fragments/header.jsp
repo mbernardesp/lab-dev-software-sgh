@@ -11,12 +11,6 @@
         <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/resources/css/font-awesome.min.css"/>
         <script src="${pageContext.request.contextPath}/resources/js/jquery.min.js"></script>
         <script src="${pageContext.request.contextPath}/resources/js/bootstrap.min.js"></script>
-
-        <script src="${pageContext.request.contextPath}/resources/js/tableHTMLExport.js"></script>
-        <script src="${pageContext.request.contextPath}/resources/js/jspdf.min.js"></script>
-        <script src="${pageContext.request.contextPath}/resources/js/jspdf.plugin.autotable.min.js"></script>
-        
-        
     </head>
     <body>
 
