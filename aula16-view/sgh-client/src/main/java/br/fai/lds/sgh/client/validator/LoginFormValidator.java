@@ -23,10 +23,10 @@ public class LoginFormValidator implements Validator {
 
     @Autowired
     IUserDao userDao;
-    
+
     @Autowired
     UserService userService;
-    
+
     @Override
     public boolean supports(Class<?> type) {
         return Login.class.equals(type);
@@ -36,7 +36,7 @@ public class LoginFormValidator implements Validator {
     public void validate(Object target, Errors errors) {
 
         Login login = (Login) target;
-        
+
         User user = null;
 
         if (login.getUser() == null || login.getUser().isEmpty()) {
@@ -48,20 +48,20 @@ public class LoginFormValidator implements Validator {
             errors.rejectValue("pass", "");
 
         } else {
-            
+
             //Local authentication
-            user = userDao.readByUserNameAndPass(login.getUser(), login.getPass());
-            
+//            user = userDao.readByUserNameAndPass(login.getUser(), login.getPass());
+
             //Remote authentication
             //user = userService.verifyRemoteUser(login.getUser(), login.getPass());
-
-            if (user == null) {
-
-                errors.rejectValue("msg", "");
-            }else{
-                
-                login.setId(user.getId());                
-            }       
+//            if (user == null) {
+//
+//                errors.rejectValue("msg", "");
+//            }else{
+//                
+//                login.setId(user.getId());                
+//            }     
+            login.setId(1L);
         }
     }
 }

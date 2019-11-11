@@ -4,7 +4,7 @@
     <groupId>br.fai.lds</groupId>
     <artifactId>sgh-client</artifactId>
     <version>1.0.0</version>
-    <packaging>jar</packaging>
+    <packaging>war</packaging>
     <name>sgi-client</name>
     <description>Client to api sgh</description>
     
