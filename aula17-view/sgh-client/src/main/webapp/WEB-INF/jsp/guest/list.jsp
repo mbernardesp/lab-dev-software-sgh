@@ -71,8 +71,6 @@
                 newline: '\r\n',
                 trimContent: true,
                 quoteFields: true,
-                htmlContent: false,
-                consoleLog: false,
             });
         }
     </script>
