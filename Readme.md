@@ -1,2 +1,2 @@
-# Software Development Lab
-Software development lab classes step by step
+# Laboratório de desenvolvimento de software
+Sequência de aulas do lab de desenvolvimento de software
