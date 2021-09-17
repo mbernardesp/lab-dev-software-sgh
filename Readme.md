@@ -6,3 +6,5 @@ Liguagens e tecnologias abordadas
 - Jsp
 - css
 - js
+- SQL
+- postgresql
