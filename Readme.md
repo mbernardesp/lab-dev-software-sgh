@@ -1,2 +1,2 @@
 # Software Development Lab
-Software development lab II classes
+Software development lab classes step by step
