@@ -1,18 +1,17 @@
-# Laboratório de desenvolvimento de software
-Sequência de aulas do lab de desenvolvimento de software
+# Software Development Lab
+Sequence of Software Development Lab Classes
 
-Liguagens e tecnologias abordadas
+Programming Languages and Technologies
 - Java
-- Jsp
-- Jsp fragments
+- JSP
+- JSP Fragments
 - css
-- js
+- JavaScript
 - SQL
-- postgresql
-- jdbc
-- dependency injection spring
-- design patterns
-- apis
-- versionamento apis
-- swagger
-- cloud-computing
+- PostgreSQL
+- JDBC
+- Dependency Injection - Spring
+- Design Patterns
+- API's
+- API's versioning
+- Swagger
